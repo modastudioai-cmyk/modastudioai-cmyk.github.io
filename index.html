@@ -1,72 +1,708 @@
-<!DOCTYPE html>
+DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>Moda Studio AI | The Luxury Brand Operating System for the AI Era</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MODA STUDIO.AI — Luxury AI Brand Operating System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --white:  #FFFFFF;
+      --off:    #F7F5F2;
+      --light:  #EFEDE9;
+      --rule:   #E2DDD7;
+      --sand:   #C8BFB2;
+      --stone:  #9A9288;
+      --ink:    #1E1B18;
+      --body:   #3D3830;
+      --muted:  #7A7268;
+      --accent: #B89A72;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--white);
+      color: var(--ink);
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 300;
+      font-size: 14px;
+      overflow-x: hidden;
+    }
+
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--off); }
+    ::-webkit-scrollbar-thumb { background: var(--sand); }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 200;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 2rem 5vw;
+      transition: background 0.5s, border-bottom 0.5s;
+    }
+    nav.scrolled {
+      background: rgba(255,255,255,0.94);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--rule);
+    }
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.05rem;
+      font-weight: 400;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--ink);
+      text-decoration: none;
+    }
+    .nav-logo sup {
+      font-size: 0.55rem;
+      color: var(--accent);
+      vertical-align: super;
+      margin-left: 2px;
+      letter-spacing: 0.1em;
+    }
+    .nav-links {
+      display: flex;
+      gap: 3rem;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 0.62rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--body);
+      text-decoration: none;
+      transition: color 0.25s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+    .nav-cta {
+      color: var(--ink) !important;
+      border-bottom: 1px solid var(--ink);
+      padding-bottom: 1px;
+    }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      background: var(--white);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: end;
+      padding: 12rem 5vw 6rem;
+      gap: 4rem;
+    }
+    .hero-eyebrow {
+      font-size: 0.6rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 2.5rem;
+      opacity: 0;
+      animation: fadeUp 0.9s 0.4s forwards;
+    }
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3.8rem, 7vw, 7rem);
+      font-weight: 300;
+      line-height: 1.0;
+      color: var(--ink);
+      opacity: 0;
+      animation: fadeUp 1s 0.6s forwards;
+    }
+    .hero-title em { font-style: italic; color: var(--stone); }
+    .hero-right {
+      opacity: 0;
+      animation: fadeUp 1s 0.9s forwards;
+      padding-bottom: 0.5rem;
+    }
+    .hero-sub {
+      font-size: 0.8rem;
+      line-height: 2;
+      color: var(--muted);
+      max-width: 380px;
+      margin-bottom: 3rem;
+    }
+    .hero-actions { display: flex; align-items: center; gap: 2.5rem; }
+
+    .btn {
+      display: inline-block;
+      font-size: 0.6rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: all 0.3s;
+    }
+    .btn-dark {
+      background: var(--ink);
+      color: var(--white);
+      padding: 1rem 2.4rem;
+    }
+    .btn-dark:hover { background: var(--accent); }
+    .btn-line {
+      color: var(--body);
+      border-bottom: 1px solid var(--sand);
+      padding-bottom: 2px;
+    }
+    .btn-line:hover { border-color: var(--ink); color: var(--ink); }
+
+    /* TICKER */
+    .ticker {
+      padding: 1.4rem 0;
+      overflow: hidden;
+      border-top: 1px solid var(--rule);
+      border-bottom: 1px solid var(--rule);
+      background: var(--off);
+    }
+    .ticker-inner {
+      display: inline-block;
+      white-space: nowrap;
+      animation: marquee 28s linear infinite;
+    }
+    .ticker-inner span {
+      font-size: 0.58rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--stone);
+      padding: 0 2.5rem;
+    }
+    .ticker-inner span.sep {
+      color: var(--accent);
+      padding: 0;
+      font-size: 0.5rem;
+    }
+
+    /* SECTIONS */
+    .section { padding: 8rem 5vw; background: var(--white); }
+    .section.off { background: var(--off); }
+    .section.light { background: var(--light); }
+
+    .label {
+      font-size: 0.58rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 2.5rem;
+    }
+    .headline {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.2rem, 4.5vw, 4rem);
+      font-weight: 300;
+      line-height: 1.1;
+      color: var(--ink);
+    }
+    .headline em { font-style: italic; color: var(--stone); }
+
+    /* PHILOSOPHY */
+    .phil-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8rem;
+      align-items: start;
+      margin-top: 5rem;
+    }
+    .phil-body p {
+      font-size: 0.78rem;
+      line-height: 2.1;
+      color: var(--muted);
+      margin-bottom: 1.5rem;
+      max-width: 460px;
+    }
+    .phil-quote blockquote {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+      font-weight: 300;
+      line-height: 1.55;
+      color: var(--ink);
+      border-left: 2px solid var(--accent);
+      padding-left: 2.5rem;
+    }
+    .phil-quote cite {
+      display: block;
+      margin-top: 2rem;
+      padding-left: 2.5rem;
+      font-size: 0.6rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--stone);
+      font-style: normal;
+    }
+
+    /* SERVICES */
+    .services-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 4rem;
+    }
+    .services-header p {
+      font-size: 0.75rem;
+      color: var(--muted);
+      line-height: 1.8;
+      max-width: 340px;
+      text-align: right;
+    }
+    .services-list { border-top: 1px solid var(--rule); }
+    .service-row {
+      display: grid;
+      grid-template-columns: 80px 1fr 1fr auto;
+      align-items: start;
+      gap: 3rem;
+      padding: 3.5rem 0;
+      border-bottom: 1px solid var(--rule);
+      transition: background 0.3s, padding 0.3s, margin 0.3s;
+      cursor: default;
+    }
+    .service-row:hover {
+      background: var(--white);
+      margin: 0 -5vw;
+      padding-left: 5vw;
+      padding-right: 5vw;
+    }
+    .s-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.75rem;
+      color: var(--sand);
+      padding-top: 6px;
+      letter-spacing: 0.1em;
+    }
+    .s-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.2rem;
+      font-weight: 300;
+      color: var(--ink);
+      line-height: 1;
+    }
+    .s-tag {
+      font-size: 0.65rem;
+      font-style: italic;
+      color: var(--stone);
+      margin-top: 0.4rem;
+    }
+    .s-items { list-style: none; padding-top: 4px; }
+    .s-items li {
+      font-size: 0.7rem;
+      line-height: 2;
+      color: var(--muted);
+      padding-left: 1.2rem;
+      position: relative;
+    }
+    .s-items li::before { content: '–'; position: absolute; left: 0; color: var(--sand); }
+    .s-price {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem;
+      font-weight: 300;
+      color: var(--ink);
+      white-space: nowrap;
+      padding-top: 4px;
+      text-align: right;
+    }
+
+    /* PROCESS */
+    .process-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 3rem;
+      margin-top: 5rem;
+    }
+    .p-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 4rem;
+      font-weight: 300;
+      color: var(--rule);
+      line-height: 1;
+      margin-bottom: 1.5rem;
+    }
+    .p-title {
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ink);
+      margin-bottom: 1rem;
+    }
+    .p-desc {
+      font-size: 0.72rem;
+      line-height: 1.95;
+      color: var(--muted);
+    }
+
+    /* CLIENTS */
+    .clients-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1px;
+      background: var(--rule);
+      margin-top: 5rem;
+    }
+    .client-cell {
+      background: var(--light);
+      padding: 3.5rem;
+      transition: background 0.35s;
+    }
+    .client-cell:hover { background: var(--off); }
+    .c-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.8rem;
+      font-weight: 300;
+      color: var(--ink);
+      margin-bottom: 1rem;
+    }
+    .c-desc {
+      font-size: 0.72rem;
+      line-height: 1.95;
+      color: var(--muted);
+    }
+
+    /* CTA */
+    .cta-section {
+      padding: 10rem 5vw;
+      background: var(--off);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: center;
+      border-top: 1px solid var(--rule);
+    }
+    .cta-left p {
+      font-size: 0.76rem;
+      line-height: 2;
+      color: var(--muted);
+      max-width: 400px;
+      margin-top: 2rem;
+    }
+    .cta-right {
+      display: flex;
+      flex-direction: column;
+      gap: 2.5rem;
+      border-left: 1px solid var(--rule);
+      padding-left: 6rem;
+    }
+    .cta-item-label {
+      font-size: 0.58rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--stone);
+      margin-bottom: 0.4rem;
+    }
+    .cta-item-value {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      color: var(--ink);
+    }
+    .cta-item-value a {
+      color: var(--ink);
+      text-decoration: none;
+      border-bottom: 1px solid var(--sand);
+      transition: border-color 0.3s;
+    }
+    .cta-item-value a:hover { border-color: var(--accent); }
+
+    /* FOOTER */
+    footer {
+      background: var(--white);
+      border-top: 1px solid var(--rule);
+      padding: 2.5rem 5vw;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .f-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.95rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--ink);
+    }
+    .f-logo sup { font-size: 0.5rem; color: var(--accent); vertical-align: super; margin-left: 2px; }
+    .f-links { display: flex; gap: 2.5rem; list-style: none; }
+    .f-links a {
+      font-size: 0.58rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--stone);
+      text-decoration: none;
+      transition: color 0.25s;
+    }
+    .f-links a:hover { color: var(--ink); }
+    .f-copy { font-size: 0.58rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--sand); }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+    .reveal {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 0.85s ease, transform 0.85s ease;
+    }
+    .reveal.vis { opacity: 1; transform: none; }
+
+    /* RESPONSIVE */
+    @media (max-width: 860px) {
+      nav { padding: 1.5rem 6vw; }
+      .nav-links { display: none; }
+      .hero { grid-template-columns: 1fr; padding: 10rem 6vw 5rem; }
+      .hero-sub { max-width: 100%; }
+      .phil-grid { grid-template-columns: 1fr; gap: 3.5rem; }
+      .services-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+      .services-header p { text-align: left; }
+      .service-row { grid-template-columns: 50px 1fr; gap: 1.5rem; }
+      .s-items, .s-price { grid-column: 2; }
+      .process-grid { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
+      .clients-grid { grid-template-columns: 1fr; }
+      .cta-section { grid-template-columns: 1fr; gap: 3.5rem; }
+      .cta-right { border-left: none; padding-left: 0; border-top: 1px solid var(--rule); padding-top: 3rem; }
+      footer { flex-direction: column; gap: 1.5rem; text-align: center; }
+      .f-links { justify-content: center; }
+      .section { padding: 5rem 6vw; }
+    }
+  </style>
 </head>
 <body>
-  <header>
-    <div class="nav-logo">MODA STUDIO AI</div>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="signature.html">Brand Programs</a>
-      <a href="case-studies.html">Case Studies</a>
-      <a href="founder.html">Founder</a>
-      <a class="btn-primary" href="https://calendly.com/modastudio-ai/strategy-session" target="_blank">Book Call</a>
-    </nav>
-  </header>
 
-  <section class="hero" style="background-image: url('abstract motion blurred editorial movement.png');">
-    <h1>Luxury Brand Operating System for the AI Era</h1>
-    <p>Moda Studio transforms brand strategy into scalable identity systems powered by creative direction and AI infrastructure.</p>
-    <div class="hero-buttons">
-      <a href="signature.html" class="btn-secondary">Brand Programs</a>
-      <a href="https://calendly.com/modastudio-ai/strategy-session" class="btn-primary" target="_blank">Book Call</a>
+  <nav id="nav">
+    <a href="#" class="nav-logo">Moda Studio<sup>.AI</sup></a>
+    <ul class="nav-links">
+      <li><a href="#philosophy">Philosophy</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#process">Process</a></li>
+      <li><a href="#clients">Clients</a></li>
+      <li><a href="#contact" class="nav-cta">Inquire</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div>
+      <p class="hero-eyebrow">Luxury AI Brand Operating System</p>
+      <h1 class="hero-title">Brand is<br><em>infrastructure,</em><br>not decoration.</h1>
+    </div>
+    <div class="hero-right">
+      <p class="hero-sub">We design intelligent brand systems for premium businesses — architecting the logic beneath how a brand earns attention, generates demand, and scales without losing integrity.</p>
+      <div class="hero-actions">
+        <a href="#services" class="btn btn-dark">View Services</a>
+        <a href="#contact" class="btn btn-line">Begin an Inquiry</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- TICKER -->
+  <div class="ticker">
+    <div class="ticker-inner">
+      <span>Brand Strategy</span><span class="sep">·</span>
+      <span>Narrative Architecture</span><span class="sep">·</span>
+      <span>AI Integration</span><span class="sep">·</span>
+      <span>Identity Systems</span><span class="sep">·</span>
+      <span>Automation Design</span><span class="sep">·</span>
+      <span>Growth Architecture</span><span class="sep">·</span>
+      <span>Cultural Positioning</span><span class="sep">·</span>
+      <span>Brand Strategy</span><span class="sep">·</span>
+      <span>Narrative Architecture</span><span class="sep">·</span>
+      <span>AI Integration</span><span class="sep">·</span>
+      <span>Identity Systems</span><span class="sep">·</span>
+      <span>Automation Design</span><span class="sep">·</span>
+      <span>Growth Architecture</span><span class="sep">·</span>
+      <span>Cultural Positioning</span><span class="sep">·</span>
+    </div>
+  </div>
+
+  <!-- PHILOSOPHY -->
+  <section class="section" id="philosophy">
+    <p class="label reveal">Our Philosophy</p>
+    <h2 class="headline reveal">We are the <em>operating system,</em><br>not the application.</h2>
+    <div class="phil-grid">
+      <div class="phil-body reveal">
+        <p>Where agencies deliver deliverables, MODA architects. Where consultants advise, MODA designs. The result is a brand that operates with precision, generates demand consistently, and scales without losing integrity.</p>
+        <p>We exist at the intersection of brand strategy, cultural intelligence, and AI systems engineering — because how a brand operates is as important as how it presents.</p>
+        <p>This is not a campaign. It is not a content calendar. It is a system — built once, refined continuously, running always.</p>
+      </div>
+      <div class="phil-quote reveal">
+        <blockquote>"Brands do not need more content. They need systems that make content, conversion, and growth inevitable."</blockquote>
+        <cite>— MODA Studio.AI</cite>
+      </div>
     </div>
   </section>
 
-  <section class="credibility">
-    <p>Built for modern lifestyle brands: Real Estate &bull; Wellness &bull; Boutique &bull; Luxury Services</p>
-  </section>
-
-  <section class="tension">
-    <h2>We don't build campaigns.<br>We build brand operating systems.</h2>
-  </section>
-
-  <section class="pillars" style="background-image: url('abstract motion blurred editorial movement.png');">
-    <div class="pillars-row">
-      <div class="pillars">
-        <h3>Story</h3>
-        <p>We define the narrative foundation behind every brand—positioning, voice, and messaging that signal timeless taste.</p>
+  <!-- SERVICES -->
+  <section class="section off" id="services">
+    <div class="services-header">
+      <div>
+        <p class="label reveal">Services</p>
+        <h2 class="headline reveal">Three tiers.<br><em>One architecture.</em></h2>
       </div>
-      <div class="pillars">
-        <h3>Shape</h3>
-        <p>We craft identity systems—logos, palettes, and mediums—that bring narrative to life.</p>
+      <p class="reveal">Each engagement begins with a build — a foundational system constructed to your business. Retainers follow to refine, evolve, and scale.</p>
+    </div>
+    <div class="services-list">
+      <div class="service-row reveal">
+        <span class="s-num">01</span>
+        <div>
+          <div class="s-name">Essential</div>
+          <div class="s-tag">Brand clarity before execution.</div>
+        </div>
+        <ul class="s-items">
+          <li>Brand Authority Framework</li>
+          <li>Cultural positioning strategy</li>
+          <li>Audience identity mapping</li>
+          <li>Brand voice & messaging architecture</li>
+          <li>Content angle framework</li>
+        </ul>
+        <div class="s-price">From $3,500</div>
       </div>
-      <div class="pillars">
-        <h3>Systems</h3>
-        <p>We design frameworks that translate the vision into repeatable experiences across touchpoints.</p>
+      <div class="service-row reveal">
+        <span class="s-num">02</span>
+        <div>
+          <div class="s-name">Growth</div>
+          <div class="s-tag">A system that generates leads consistently.</div>
+        </div>
+        <ul class="s-items">
+          <li>Everything in Essential</li>
+          <li>AI Content Engine</li>
+          <li>Lead magnet strategy</li>
+          <li>DM automation flow</li>
+          <li>Case study & offer assets</li>
+        </ul>
+        <div class="s-price">From $7,500</div>
       </div>
-      <div class="pillars">
-        <h3>Signals</h3>
-        <p>We deploy assets, content, and micro-experiences that communicate status and intention.</p>
+      <div class="service-row reveal">
+        <span class="s-num">03</span>
+        <div>
+          <div class="s-name">Signature</div>
+          <div class="s-tag">A fully integrated, automated brand ecosystem.</div>
+        </div>
+        <ul class="s-items">
+          <li>Everything in Growth</li>
+          <li>Full system architecture design</li>
+          <li>Automation loops (content → CRM → email)</li>
+          <li>Campaign logic & seasonal frameworks</li>
+          <li>Growth roadmap & handoff plan</li>
+        </ul>
+        <div class="s-price">From $18,000</div>
       </div>
     </div>
   </section>
 
-  <section class="difference">
-    <h2>Narrative, identity, and direction require human judgement.</h2>
-    <p>AI is an incredible tool, but luxury brands demand taste and perspective. Moda Studio AI blends human creative direction with AI to build scalable operating systems you own.</p>
+  <!-- PROCESS -->
+  <section class="section" id="process">
+    <p class="label reveal">How It Works</p>
+    <h2 class="headline reveal">A journey designed<br>to <em>filter, build,</em> and scale.</h2>
+    <div class="process-grid">
+      <div class="reveal">
+        <div class="p-num">01</div>
+        <div class="p-title">Discovery & Inquiry</div>
+        <p class="p-desc">The client encounters MODA through curated positioning. First contact triggers an inquiry, not a pitch. MODA does not pursue; it attracts.</p>
+      </div>
+      <div class="reveal">
+        <div class="p-num">02</div>
+        <div class="p-title">Intake & Qualification</div>
+        <p class="p-desc">A structured intake evaluates fit — business stage, asset readiness, revenue, and alignment with MODA's positioning philosophy.</p>
+      </div>
+      <div class="reveal">
+        <div class="p-num">03</div>
+        <div class="p-title">Strategy Session</div>
+        <p class="p-desc">Qualified clients enter a paid strategy session — the foundation of system design, defining current position and the architecture to close the gap.</p>
+      </div>
+      <div class="reveal">
+        <div class="p-num">04</div>
+        <div class="p-title">Build & Scale</div>
+        <p class="p-desc">The build begins — phased, milestone-driven, overseen by the founder. Following activation, clients transition into an ongoing retainer relationship.</p>
+      </div>
+    </div>
   </section>
 
-  <section class="final-cta" style="background-image: url('minimal_editorial_background_neutral_gradient.png');">
-    <h2>Ready to build your brand operating system?</h2>
-    <a class="btn-primary" href="https://calendly.com/modastudio-ai/strategy-session" target="_blank">Book Call</a>
+  <!-- CLIENTS -->
+  <section class="section light" id="clients">
+    <p class="label reveal">Who We Serve</p>
+    <h2 class="headline reveal">Premium brands.<br><em>Selective roster.</em></h2>
+    <div class="clients-grid">
+      <div class="client-cell reveal">
+        <h3 class="c-name">Luxury Real Estate</h3>
+        <p class="c-desc">Developers, teams, and independents repositioning for premium market share — where trust and cultural positioning determine every transaction.</p>
+      </div>
+      <div class="client-cell reveal">
+        <h3 class="c-name">Aesthetics & Medical Spa</h3>
+        <p class="c-desc">Established practices scaling beyond referral-dependent growth — building brand infrastructure that generates demand with precision.</p>
+      </div>
+      <div class="client-cell reveal">
+        <h3 class="c-name">Fashion & Boutique Retail</h3>
+        <p class="c-desc">Independent brands building category authority — moving beyond seasonal campaigns into structural, self-sustaining growth architecture.</p>
+      </div>
+      <div class="client-cell reveal">
+        <h3 class="c-name">Modern Lifestyle Brands</h3>
+        <p class="c-desc">Businesses operating at the intersection of culture, identity, and commerce — where how a brand operates determines market position.</p>
+      </div>
+    </div>
   </section>
 
+  <!-- CONTACT -->
+  <div class="cta-section" id="contact">
+    <div class="cta-left reveal">
+      <p class="label">Begin</p>
+      <h2 class="headline">Ready to architect<br>your <em>brand system?</em></h2>
+      <p>MODA works with a select number of clients at any time. Intake is intentional — not every inquiry becomes an engagement. If you're ready to invest in infrastructure, we'd like to hear from you.</p>
+      <a href="mailto:hello@modastudio.ai" class="btn btn-dark" style="margin-top:2.5rem; display:inline-block;">Submit an Inquiry</a>
+    </div>
+    <div class="cta-right reveal">
+      <div class="cta-item">
+        <p class="cta-item-label">Email</p>
+        <p class="cta-item-value"><a href="mailto:hello@modastudio.ai">hello@modastudio.ai</a></p>
+      </div>
+      <div class="cta-item">
+        <p class="cta-item-label">Location</p>
+        <p class="cta-item-value">Available Worldwide</p>
+      </div>
+      <div class="cta-item">
+        <p class="cta-item-label">Current Availability</p>
+        <p class="cta-item-value">Selective — Inquiry Required</p>
+      </div>
+      <div class="cta-item">
+        <p class="cta-item-label">Starting Investment</p>
+        <p class="cta-item-value">From $3,500</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
   <footer>
-    <p>&copy; 2026 Moda Studio AI. All rights reserved.</p>
+    <div class="f-logo">Moda Studio<sup>.AI</sup></div>
+    <ul class="f-links">
+      <li><a href="#philosophy">Philosophy</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#process">Process</a></li>
+      <li><a href="#contact">Inquire</a></li>
+    </ul>
+    <p class="f-copy">© 2025 MODA Studio.AI · Confidential</p>
   </footer>
+
+  <script>
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 50);
+    });
+    const reveals = document.querySelectorAll('.reveal');
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e, i) => {
+        if (e.isIntersecting) {
+          setTimeout(() => e.target.classList.add('vis'), i * 70);
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    reveals.forEach(el => io.observe(el));
+  </script>
+
 </body>
 </html>
