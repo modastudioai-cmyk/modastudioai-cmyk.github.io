@@ -1,4 +1,4 @@
-DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -30,7 +30,7 @@ DOCTYPE html>
       color: var(--ink);
       font-family: 'Montserrat', sans-serif;
       font-weight: 300;
-      font-size: 14px;
+      font-size: 16px;
       overflow-x: hidden;
     }
 
@@ -56,7 +56,7 @@ DOCTYPE html>
     }
     .nav-logo {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 1.05rem;
+      font-size: 1.3rem;
       font-weight: 400;
       letter-spacing: 0.28em;
       text-transform: uppercase;
@@ -64,7 +64,7 @@ DOCTYPE html>
       text-decoration: none;
     }
     .nav-logo sup {
-      font-size: 0.55rem;
+      font-size: 0.65rem;
       color: var(--accent);
       vertical-align: super;
       margin-left: 2px;
@@ -76,7 +76,7 @@ DOCTYPE html>
       list-style: none;
     }
     .nav-links a {
-      font-size: 0.62rem;
+      font-size: 0.78rem;
       letter-spacing: 0.2em;
       text-transform: uppercase;
       color: var(--body);
@@ -101,7 +101,7 @@ DOCTYPE html>
       gap: 4rem;
     }
     .hero-eyebrow {
-      font-size: 0.6rem;
+      font-size: 0.78rem;
       letter-spacing: 0.35em;
       text-transform: uppercase;
       color: var(--accent);
@@ -125,7 +125,7 @@ DOCTYPE html>
       padding-bottom: 0.5rem;
     }
     .hero-sub {
-      font-size: 0.8rem;
+      font-size: 1rem;
       line-height: 2;
       color: var(--muted);
       max-width: 380px;
@@ -135,7 +135,7 @@ DOCTYPE html>
 
     .btn {
       display: inline-block;
-      font-size: 0.6rem;
+      font-size: 0.78rem;
       letter-spacing: 0.22em;
       text-transform: uppercase;
       text-decoration: none;
@@ -168,7 +168,7 @@ DOCTYPE html>
       animation: marquee 28s linear infinite;
     }
     .ticker-inner span {
-      font-size: 0.58rem;
+      font-size: 0.75rem;
       letter-spacing: 0.28em;
       text-transform: uppercase;
       color: var(--stone);
@@ -177,7 +177,7 @@ DOCTYPE html>
     .ticker-inner span.sep {
       color: var(--accent);
       padding: 0;
-      font-size: 0.5rem;
+      font-size: 0.65rem;
     }
 
     /* SECTIONS */
@@ -186,7 +186,7 @@ DOCTYPE html>
     .section.light { background: var(--light); }
 
     .label {
-      font-size: 0.58rem;
+      font-size: 0.75rem;
       letter-spacing: 0.35em;
       text-transform: uppercase;
       color: var(--accent);
@@ -210,7 +210,7 @@ DOCTYPE html>
       margin-top: 5rem;
     }
     .phil-body p {
-      font-size: 0.78rem;
+      font-size: 0.95rem;
       line-height: 2.1;
       color: var(--muted);
       margin-bottom: 1.5rem;
@@ -245,7 +245,7 @@ DOCTYPE html>
       margin-bottom: 4rem;
     }
     .services-header p {
-      font-size: 0.75rem;
+      font-size: 0.92rem;
       color: var(--muted);
       line-height: 1.8;
       max-width: 340px;
@@ -283,14 +283,14 @@ DOCTYPE html>
       line-height: 1;
     }
     .s-tag {
-      font-size: 0.65rem;
+      font-size: 0.82rem;
       font-style: italic;
       color: var(--stone);
       margin-top: 0.4rem;
     }
     .s-items { list-style: none; padding-top: 4px; }
     .s-items li {
-      font-size: 0.7rem;
+      font-size: 0.88rem;
       line-height: 2;
       color: var(--muted);
       padding-left: 1.2rem;
@@ -653,12 +653,12 @@ DOCTYPE html>
       <p class="label">Begin</p>
       <h2 class="headline">Ready to architect<br>your <em>brand system?</em></h2>
       <p>MODA works with a select number of clients at any time. Intake is intentional — not every inquiry becomes an engagement. If you're ready to invest in infrastructure, we'd like to hear from you.</p>
-      <a href="mailto:hello@modastudio.ai" class="btn btn-dark" style="margin-top:2.5rem; display:inline-block;">Submit an Inquiry</a>
+      <a href="/cdn-cgi/l/email-protection#a4ccc1c8c8cbe4c9cbc0c5d7d0d1c0cdcb8ac5cd" class="btn btn-dark" style="margin-top:2.5rem; display:inline-block;">Submit an Inquiry</a>
     </div>
     <div class="cta-right reveal">
       <div class="cta-item">
         <p class="cta-item-label">Email</p>
-        <p class="cta-item-value"><a href="mailto:hello@modastudio.ai">hello@modastudio.ai</a></p>
+        <p class="cta-item-value"><a href="/cdn-cgi/l/email-protection#244c4148484b64494b4045575051404d4b0a454d"><span class="__cf_email__" data-cfemail="84ece1e8e8ebc4e9ebe0e5f7f0f1e0edebaae5ed">[email&#160;protected]</span></a></p>
       </div>
       <div class="cta-item">
         <p class="cta-item-label">Location</p>
@@ -687,22 +687,13 @@ DOCTYPE html>
     <p class="f-copy">© 2025 MODA Studio.AI · Confidential</p>
   </footer>
 
-  <script>
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
     const nav = document.getElementById('nav');
     window.addEventListener('scroll', () => {
       nav.classList.toggle('scrolled', window.scrollY > 50);
     });
     const reveals = document.querySelectorAll('.reveal');
     const io = new IntersectionObserver((entries) => {
-      entries.forEach((e, i) => {
-        if (e.isIntersecting) {
-          setTimeout(() => e.target.classList.add('vis'), i * 70);
-          io.unobserve(e.target);
-        }
-      });
-    }, { threshold: 0.1 });
-    reveals.forEach(el => io.observe(el));
-  </script>
 
 </body>
 </html>
