@@ -13,17 +13,17 @@
 
 ```
 :root {
-  --cream:     #f5f0e8;
-  --cream-2:   #ede7d9;
-  --cream-3:   #e4dcca;
-  --border:    #d5ccb8;
-  --text:      #1c1a15;
-  --text-2:    #3d3a32;
-  --muted:     #6e6a5e;
-  --gold:      #9a7c4a;
-  --gold-lt:   #b89660;
-  --gold-bg:   #f0e8d4;
-  --ink:       #18160f;
+  --cream:   #f5f0e8;
+  --cream-2: #ede7d9;
+  --cream-3: #e4dcca;
+  --border:  #d5ccb8;
+  --text:    #1c1a15;
+  --text-2:  #3d3a32;
+  --muted:   #6e6a5e;
+  --gold:    #9a7c4a;
+  --gold-lt: #b89660;
+  --gold-bg: #f0e8d4;
+  --ink:     #18160f;
 }
 
 html { scroll-behavior: smooth; }
@@ -47,7 +47,7 @@ nav {
   justify-content: space-between;
   padding: 0 52px;
   height: 60px;
-  background: rgba(245,240,232,0.95);
+  background: rgba(245,240,232,0.96);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border-bottom: 1px solid var(--border);
@@ -83,7 +83,7 @@ nav {
 }
 .nav-cta:hover { background: var(--gold); }
 
-/* ── HERO ── tight on mobile, full on desktop ── */
+/* ── HERO ── */
 .hero {
   display: flex;
   flex-direction: column;
@@ -95,8 +95,6 @@ nav {
   border-bottom: 1px solid var(--border);
   min-height: calc(100vh - 60px);
 }
-
-/* Founding pill — lives inside hero, no separate banner */
 .founding-pill {
   display: inline-flex;
   align-items: center;
@@ -115,7 +113,6 @@ nav {
   animation: rise 0.9s ease 0.1s forwards;
 }
 .founding-pill-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--gold); flex-shrink: 0; }
-
 .hero-label {
   font-size: 0.63rem;
   font-weight: 400;
@@ -126,7 +123,6 @@ nav {
   opacity: 0;
   animation: rise 0.9s ease 0.25s forwards;
 }
-
 .hero-title {
   font-family: 'Playfair Display', serif;
   font-weight: 400;
@@ -139,7 +135,6 @@ nav {
   animation: rise 0.9s ease 0.4s forwards;
 }
 .hero-title em { font-style: italic; color: var(--gold); }
-
 .hero-sub {
   margin-top: 24px;
   font-size: 1rem;
@@ -149,7 +144,6 @@ nav {
   opacity: 0;
   animation: rise 0.9s ease 0.55s forwards;
 }
-
 .hero-actions {
   margin-top: 36px;
   display: flex;
@@ -176,7 +170,6 @@ nav {
   display: inline-block;
   font-size: 0.82rem;
   font-weight: 300;
-  letter-spacing: 0.03em;
   color: var(--text-2);
   text-decoration: none;
   padding: 14px 34px;
@@ -185,7 +178,6 @@ nav {
   transition: border-color 0.2s;
 }
 .btn-ghost:hover { border-color: var(--text); }
-
 .hero-stats {
   margin-top: 56px;
   display: flex;
@@ -200,269 +192,202 @@ nav {
   max-width: 560px;
 }
 .hstat { text-align: center; }
-.hstat-n {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.9rem;
-  font-weight: 400;
-  color: var(--text);
-  line-height: 1;
-}
+.hstat-n { font-family: 'Playfair Display', serif; font-size: 1.9rem; font-weight: 400; color: var(--text); line-height: 1; }
 .hstat-l { margin-top: 6px; font-size: 0.68rem; color: var(--muted); letter-spacing: 0.04em; line-height: 1.5; }
 .hstat-div { width: 1px; height: 36px; background: var(--border); align-self: center; }
 
 /* ── TICKER ── */
-.ticker {
-  background: var(--cream-2);
-  border-bottom: 1px solid var(--border);
-  padding: 14px 0;
-  overflow: hidden;
-}
-.ticker-track {
-  display: flex;
-  white-space: nowrap;
-  animation: scroll-x 30s linear infinite;
-}
+.ticker { background: var(--cream-2); border-bottom: 1px solid var(--border); padding: 14px 0; overflow: hidden; }
+.ticker-track { display: flex; white-space: nowrap; animation: scroll-x 30s linear infinite; }
 .ti { font-size: 0.63rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); padding: 0 38px; flex-shrink: 0; }
 .tg { color: var(--gold); font-size: 0.4rem; flex-shrink: 0; align-self: center; }
 
-/* ── SECTIONS ── */
-.section { padding: 110px 52px; background: var(--cream); }
+/* ── SECTION BASE ── */
+.section { padding: 100px 52px; background: var(--cream); }
 .section.alt { background: var(--cream-2); }
 .inner { max-width: 1080px; margin: 0 auto; }
 .center { text-align: center; }
-
-.eyebrow {
-  display: inline-block;
-  font-size: 0.63rem;
-  font-weight: 500;
-  letter-spacing: 0.24em;
-  text-transform: uppercase;
-  color: var(--gold);
-  margin-bottom: 18px;
-}
-.h2 {
-  font-family: 'Playfair Display', serif;
-  font-weight: 400;
-  font-size: clamp(1.9rem, 3.2vw, 3rem);
-  line-height: 1.2;
-  color: var(--text);
-}
+.eyebrow { display: inline-block; font-size: 0.63rem; font-weight: 500; letter-spacing: 0.24em; text-transform: uppercase; color: var(--gold); margin-bottom: 18px; }
+.h2 { font-family: 'Playfair Display', serif; font-weight: 400; font-size: clamp(1.9rem, 3.2vw, 3rem); line-height: 1.2; color: var(--text); }
 .h2 em { font-style: italic; color: var(--gold); }
-.lead {
-  margin-top: 18px;
-  font-size: 1rem;
-  line-height: 1.85;
-  color: var(--muted);
-  max-width: 540px;
-}
+.lead { margin-top: 18px; font-size: 1rem; line-height: 1.85; color: var(--muted); max-width: 540px; }
 .center .lead { margin-left: auto; margin-right: auto; }
 
-/* ── WHAT GRID ── */
-.what-grid {
+/* ── STORY ── Section 3 — trust before pitch ── */
+.story-cols {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 1px;
-  background: var(--border);
-  margin-top: 56px;
-  border: 1px solid var(--border);
+  gap: 72px;
+  align-items: center;
+  margin-top: 52px;
 }
-.wcard { background: var(--cream); padding: 50px 44px; transition: background 0.2s; }
+.story-quote {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.3rem, 2.5vw, 1.9rem);
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.55;
+  color: var(--text);
+  border-left: 2px solid var(--gold);
+  padding-left: 28px;
+}
+.story-body p { font-size: 0.92rem; line-height: 1.95; color: var(--muted); margin-bottom: 16px; }
+.story-body p strong { color: var(--text-2); font-weight: 500; }
+.story-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 8px;
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+.story-tag::before { content: ''; display: block; width: 24px; height: 1px; background: var(--gold); }
+
+/* ── WHAT WE DO ── Section 4 ── */
+.what-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); margin-top: 52px; border: 1px solid var(--border); }
+.wcard { background: var(--cream); padding: 48px 42px; transition: background 0.2s; }
 .wcard:hover { background: var(--cream-2); }
-.wc-n { font-family: 'Playfair Display', serif; font-size: 0.85rem; color: var(--gold); margin-bottom: 20px; opacity: 0.6; }
-.wc-t { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 400; color: var(--text); margin-bottom: 12px; }
-.wc-b { font-size: 0.9rem; line-height: 1.85; color: var(--muted); }
+.wc-n { font-family: 'Playfair Display', serif; font-size: 0.85rem; color: var(--gold); margin-bottom: 18px; opacity: 0.5; }
+.wc-t { font-family: 'Playfair Display', serif; font-size: 1.25rem; font-weight: 400; color: var(--text); margin-bottom: 10px; }
+.wc-b { font-size: 0.88rem; line-height: 1.85; color: var(--muted); }
 
-/* ── POSITION ── */
-.pos-cols {
+/* ── POSITION ── Section 5 — compressed, punchy ── */
+.pos-strip {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1px;
   background: var(--border);
-  margin-top: 56px;
+  margin-top: 52px;
   border: 1px solid var(--border);
 }
-.pcol { background: var(--cream); padding: 52px 44px; }
-.pcol.highlight { background: var(--cream-2); border-left: 3px solid var(--gold); }
-.pc-lbl { font-size: 0.6rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); margin-bottom: 30px; }
-.pcol.highlight .pc-lbl { color: var(--gold); }
+.pcol { background: var(--cream); padding: 48px 44px; }
+.pcol.dark { background: var(--ink); }
+.pc-lbl { font-size: 0.6rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); margin-bottom: 28px; }
+.pcol.dark .pc-lbl { color: rgba(245,240,232,0.3); }
 .pc-list { list-style: none; }
-.pc-list li {
-  font-size: 0.92rem;
-  color: var(--muted);
-  padding: 13px 0;
-  border-bottom: 1px solid var(--border);
-  display: flex;
-  gap: 14px;
-  align-items: flex-start;
-  line-height: 1.5;
-}
+.pc-list li { font-size: 0.9rem; color: var(--muted); padding: 12px 0; border-bottom: 1px solid var(--border); display: flex; gap: 14px; align-items: flex-start; line-height: 1.5; }
 .pc-list li:last-child { border-bottom: none; }
-.pcol.highlight .pc-list li { color: var(--text-2); }
+.pcol.dark .pc-list li { color: rgba(245,240,232,0.65); border-color: rgba(255,255,255,0.07); }
 .pc-list li::before { content: '—'; color: var(--border); font-size: 0.65rem; flex-shrink: 0; margin-top: 3px; }
-.pcol.highlight .pc-list li::before { content: '✦'; color: var(--gold); font-size: 0.5rem; margin-top: 4px; }
+.pcol.dark .pc-list li::before { content: '✦'; color: var(--gold-lt); font-size: 0.5rem; margin-top: 4px; }
 
-/* ── TIERS ── */
-.tiers {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1px;
-  background: var(--border);
-  margin-top: 56px;
-  border: 1px solid var(--border);
+/* ── MID-PAGE CTA ── Section 6 — strike while warm ── */
+.mid-cta {
+  background: var(--ink);
+  padding: 88px 52px;
+  text-align: center;
 }
-.tier {
-  background: var(--cream);
-  padding: 48px 38px;
-  display: flex;
-  flex-direction: column;
+.mid-cta .eyebrow { color: var(--gold-lt); }
+.mid-cta-title {
+  font-family: 'Playfair Display', serif;
+  font-weight: 400;
+  font-size: clamp(1.8rem, 3.5vw, 3rem);
+  line-height: 1.2;
+  color: var(--cream);
+  margin-bottom: 16px;
+}
+.mid-cta-title em { font-style: italic; color: var(--gold-lt); }
+.mid-cta-sub {
+  font-size: 0.95rem;
+  line-height: 1.8;
+  color: rgba(245,240,232,0.45);
+  max-width: 480px;
+  margin: 0 auto 36px;
+}
+.mid-cta-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.btn-gold {
+  display: inline-block;
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  color: var(--cream);
+  background: var(--gold);
+  text-decoration: none;
+  padding: 14px 36px;
+  border-radius: 100px;
   transition: background 0.2s;
-  position: relative;
 }
+.btn-gold:hover { background: var(--gold-lt); }
+.btn-cream-ghost {
+  display: inline-block;
+  font-size: 0.82rem;
+  font-weight: 300;
+  color: rgba(245,240,232,0.6);
+  text-decoration: none;
+  padding: 14px 36px;
+  border-radius: 100px;
+  border: 1px solid rgba(245,240,232,0.15);
+  transition: all 0.2s;
+}
+.btn-cream-ghost:hover { border-color: rgba(245,240,232,0.4); color: var(--cream); }
+.mid-cta-note {
+  margin-top: 20px;
+  font-size: 0.67rem;
+  color: rgba(245,240,232,0.22);
+  letter-spacing: 0.08em;
+}
+
+/* ── SESSION DETAILS ── inside mid-CTA section ── */
+.session-covers {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: rgba(245,240,232,0.06);
+  border: 1px solid rgba(245,240,232,0.06);
+  margin-top: 52px;
+  text-align: left;
+}
+.sc-card { padding: 32px 28px; }
+.sc-num { font-family: 'Playfair Display', serif; font-size: 0.8rem; color: var(--gold); opacity: 0.4; margin-bottom: 12px; }
+.sc-title { font-family: 'Playfair Display', serif; font-size: 1rem; color: var(--cream); margin-bottom: 8px; font-weight: 400; }
+.sc-body { font-size: 0.78rem; line-height: 1.7; color: rgba(245,240,232,0.38); }
+
+/* ── TIERS ── Section 7 ── */
+.tiers { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); margin-top: 52px; border: 1px solid var(--border); }
+.tier { background: var(--cream); padding: 48px 36px; display: flex; flex-direction: column; transition: background 0.2s; position: relative; }
 .tier:hover { background: var(--cream-2); }
 .tier.feat { background: var(--cream); border: 2px solid var(--gold); margin: -1px; z-index: 1; }
 .tier.feat:hover { background: var(--gold-bg); }
-.feat-badge {
-  position: absolute;
-  top: -1px; right: 20px;
-  background: var(--gold);
-  color: var(--cream);
-  font-size: 0.52rem;
-  font-weight: 500;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  padding: 5px 14px;
-}
+.feat-badge { position: absolute; top: -1px; right: 20px; background: var(--gold); color: var(--cream); font-size: 0.52rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; padding: 5px 14px; }
 .t-num { font-size: 0.58rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; }
-.t-name { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 400; color: var(--text); margin-bottom: 6px; }
-.t-tag { font-size: 0.82rem; color: var(--muted); margin-bottom: 30px; font-style: italic; line-height: 1.5; }
-.t-price { font-family: 'Playfair Display', serif; font-size: 2.1rem; font-weight: 400; color: var(--text); margin-bottom: 4px; }
-.t-pnote { font-size: 0.67rem; color: var(--muted); margin-bottom: 28px; }
-.t-rule { height: 1px; background: var(--border); margin-bottom: 26px; }
+.t-name { font-family: 'Playfair Display', serif; font-size: 1.55rem; font-weight: 400; color: var(--text); margin-bottom: 6px; }
+.t-tag { font-size: 0.8rem; color: var(--muted); margin-bottom: 24px; font-style: italic; line-height: 1.5; }
+.t-pnote { font-size: 0.67rem; color: var(--gold); margin-bottom: 24px; letter-spacing: 0.04em; }
+.t-rule { height: 1px; background: var(--border); margin-bottom: 24px; }
 .tier.feat .t-rule { background: var(--gold); opacity: 0.25; }
 .t-list { list-style: none; flex: 1; }
-.t-list li {
-  font-size: 0.82rem;
-  color: var(--muted);
-  padding: 9px 0;
-  border-bottom: 1px solid var(--cream-3);
-  display: flex;
-  gap: 11px;
-  line-height: 1.5;
-}
+.t-list li { font-size: 0.8rem; color: var(--muted); padding: 9px 0; border-bottom: 1px solid var(--cream-3); display: flex; gap: 10px; line-height: 1.5; }
 .t-list li:last-child { border-bottom: none; }
 .tier.feat .t-list li { color: var(--text-2); border-color: var(--border); }
 .t-list li::before { content: '·'; color: var(--gold); flex-shrink: 0; }
-.t-btn {
-  display: block;
-  text-align: center;
-  margin-top: 30px;
-  font-size: 0.76rem;
-  font-weight: 500;
-  letter-spacing: 0.05em;
-  color: var(--text);
-  text-decoration: none;
-  padding: 13px;
-  border: 1px solid var(--border);
-  border-radius: 100px;
-  transition: all 0.2s;
-}
+.t-btn { display: block; text-align: center; margin-top: 28px; font-size: 0.76rem; font-weight: 500; letter-spacing: 0.04em; color: var(--text); text-decoration: none; padding: 13px; border: 1px solid var(--border); border-radius: 100px; transition: all 0.2s; }
 .t-btn:hover { border-color: var(--text); }
 .tier.feat .t-btn { background: var(--gold); border-color: var(--gold); color: var(--cream); }
 .tier.feat .t-btn:hover { background: var(--gold-lt); border-color: var(--gold-lt); }
 
-/* ── RETAINERS ── */
-.ret-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1px;
-  background: var(--border);
-  margin-top: 56px;
-  border: 1px solid var(--border);
-}
-.rcard { background: var(--cream); padding: 46px 36px; transition: background 0.2s; }
-.rcard:hover { background: var(--cream-2); }
-.r-tier { font-size: 0.58rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
-.r-name { font-family: 'Playfair Display', serif; font-size: 1.25rem; font-weight: 400; color: var(--text); margin-bottom: 10px; }
-.r-price { font-family: 'Playfair Display', serif; font-size: 1.85rem; color: var(--text); margin-bottom: 4px; }
-.r-note { font-size: 0.67rem; color: var(--muted); margin-bottom: 22px; }
-.r-rule { height: 1px; background: var(--border); margin-bottom: 18px; }
-.r-body { font-size: 0.82rem; line-height: 1.85; color: var(--muted); }
-
-/* ── STORY ── */
-.story-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  max-width: 680px;
-  margin-top: 56px;
-}
-.sl blockquote {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.4rem;
-  font-style: italic;
-  font-weight: 400;
-  line-height: 1.6;
-  color: var(--text);
-  border-left: 2px solid var(--gold);
-  padding-left: 24px;
-  margin-bottom: 32px;
-}
-.sl p { font-size: 0.92rem; line-height: 1.95; color: var(--muted); margin-bottom: 16px; }
-.sl p strong { color: var(--text-2); font-weight: 500; }
-.sr { background: var(--cream-2); border: 1px solid var(--border); padding: 44px 38px; }
-.sr-lbl { font-size: 0.6rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); margin-bottom: 28px; }
-.cred { padding: 16px 0; border-bottom: 1px solid var(--border); }
-.cred:last-child { border-bottom: none; padding-bottom: 0; }
-.cred-co { font-size: 0.88rem; font-weight: 500; color: var(--text); margin-bottom: 4px; }
-.cred-r { font-size: 0.78rem; color: var(--muted); line-height: 1.65; }
-
-/* ── PROCESS ── */
-.proc-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1px;
-  background: var(--border);
-  margin-top: 56px;
-  border: 1px solid var(--border);
-}
-.pstep { background: var(--cream); padding: 46px 32px; transition: background 0.2s; }
+/* ── PROCESS ── Section 8 — short, scannable ── */
+.proc-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border); margin-top: 52px; border: 1px solid var(--border); }
+.pstep { background: var(--cream); padding: 44px 30px; transition: background 0.2s; }
 .pstep:hover { background: var(--cream-2); }
-.ps-n { font-family: 'Playfair Display', serif; font-size: 2.2rem; color: var(--gold); opacity: 0.2; line-height: 1; margin-bottom: 22px; }
-.ps-t { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 400; color: var(--text); margin-bottom: 12px; }
-.ps-b { font-size: 0.82rem; line-height: 1.85; color: var(--muted); }
+.ps-n { font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--gold); opacity: 0.2; line-height: 1; margin-bottom: 20px; }
+.ps-t { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 400; color: var(--text); margin-bottom: 10px; }
+.ps-b { font-size: 0.8rem; line-height: 1.85; color: var(--muted); }
 
-/* ── CTA ── */
-.cta-section { background: var(--ink); padding: 130px 52px; text-align: center; }
-.cta-section .eyebrow { color: var(--gold-lt); }
-.cta-section .h2 { color: var(--cream); }
-.cta-section .h2 em { color: var(--gold-lt); }
-.cta-section .lead { color: rgba(245,240,232,0.5); }
-.cta-founding {
-  display: inline-block;
-  margin-top: 24px;
-  background: rgba(154,124,74,0.12);
-  border: 1px solid rgba(154,124,74,0.28);
-  border-radius: 100px;
-  padding: 9px 22px;
-  font-size: 0.7rem;
-  letter-spacing: 0.1em;
-  color: var(--gold-lt);
-}
-.cta-note { margin-top: 18px; font-size: 0.67rem; color: rgba(245,240,232,0.22); letter-spacing: 0.08em; }
+/* ── FINAL CTA ── Section 9 ── */
+.cta-final { background: var(--cream-2); padding: 120px 52px; text-align: center; border-top: 1px solid var(--border); }
+.cta-final .eyebrow { color: var(--gold); }
+.cta-final .h2 { color: var(--text); }
+.cta-final .h2 em { color: var(--gold); }
+.cta-final .lead { color: var(--muted); }
+.cta-final-note { margin-top: 16px; font-size: 0.67rem; color: var(--muted); letter-spacing: 0.06em; }
 
 /* ── FOOTER ── */
-footer {
-  background: var(--ink);
-  border-top: 1px solid rgba(245,240,232,0.07);
-  padding: 40px 52px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 20px;
-}
+footer { background: var(--ink); border-top: 1px solid rgba(245,240,232,0.07); padding: 40px 52px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
 .f-logo { font-weight: 500; font-size: 0.78rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--cream); }
 .f-mid { font-size: 0.67rem; color: rgba(245,240,232,0.22); letter-spacing: 0.05em; text-align: center; line-height: 1.8; }
-.f-email a { font-size: 0.76rem; color: var(--gold-lt); text-decoration: none; transition: color 0.2s; }
+.f-email a { font-size: 0.76rem; color: var(--gold-lt); text-decoration: none; }
 .f-email a:hover { color: var(--cream); }
 
 /* ── REVEAL ── */
@@ -482,38 +407,30 @@ footer {
 @media (max-width: 860px) {
   nav { padding: 0 20px; height: 56px; }
   .nav-links { display: none; }
-  .section { padding: 72px 22px; }
-
-  /* Hero: compact so title + sub + buttons all visible above fold */
-  .hero {
-    padding: 72px 22px 48px;
-    min-height: auto;
-  }
-  .founding-pill { font-size: 0.6rem; padding: 6px 14px; margin-bottom: 20px; }
-  .hero-label { font-size: 0.6rem; margin-bottom: 14px; }
-  .hero-title { font-size: clamp(2rem, 9vw, 2.8rem); line-height: 1.1; }
+  .section { padding: 70px 22px; }
+  .hero { padding: 72px 22px 48px; min-height: auto; }
+  .hero-title { font-size: clamp(2rem, 9vw, 2.8rem); }
   .hero-sub { font-size: 0.92rem; margin-top: 16px; }
-  .hero-actions { margin-top: 28px; gap: 10px; }
-  .hero-actions .btn-ink,
-  .hero-actions .btn-ghost { padding: 13px 28px; font-size: 0.78rem; }
-  .hero-stats { margin-top: 40px; padding-top: 28px; gap: 32px; }
+  .hero-actions { margin-top: 28px; }
+  .hero-stats { margin-top: 40px; padding-top: 28px; gap: 28px; }
   .hstat-div { display: none; }
-
+  .story-cols { grid-template-columns: 1fr; gap: 36px; }
   .what-grid { grid-template-columns: 1fr; }
-  .pos-cols { grid-template-columns: 1fr; }
-  .pcol.highlight { border-left: none; border-top: 3px solid var(--gold); }
+  .pos-strip { grid-template-columns: 1fr; }
+  .mid-cta { padding: 72px 22px; }
+  .session-covers { grid-template-columns: 1fr 1fr; }
   .tiers { grid-template-columns: 1fr; }
   .tier.feat { margin: 0; }
-  .ret-grid { grid-template-columns: 1fr; }
-  .story-grid { grid-template-columns: 1fr; gap: 40px; }
   .proc-grid { grid-template-columns: 1fr 1fr; }
-  .cta-section { padding: 88px 22px; }
+  .cta-final { padding: 88px 22px; }
   footer { flex-direction: column; text-align: center; padding: 36px 22px; }
   .f-email { text-align: center; }
 }
 @media (max-width: 480px) {
   .proc-grid { grid-template-columns: 1fr; }
+  .session-covers { grid-template-columns: 1fr; }
   .h2 { font-size: 1.75rem; }
+  .mid-cta-title { font-size: 1.7rem; }
 }
 ```
 
@@ -524,55 +441,41 @@ footer {
   <!-- NAV -->
 
   <nav>
-    <a href="#" class="nav-logo">MODA Studio.AI</a>
+    <a href="index.html" class="nav-logo">MODA Studio.AI</a>
     <ul class="nav-links">
-      <li><a href="#what">What We Do</a></li>
-      <li><a href="#services">Services</a></li>
       <li><a href="#story">Our Story</a></li>
-      <li><a href="#process">Process</a></li>
+      <li><a href="#what">What We Do</a></li>
+      <li><a href="#session">Strategy Session</a></li>
+      <li><a href="#services">Services</a></li>
     </ul>
-    <a href="#contact" class="nav-cta">Book a Strategy Call</a>
+    <a href="strategy-session.html" class="nav-cta">Book a Strategy Call</a>
   </nav>
 
-  <!-- HERO -->
+  <!-- 1. HERO -->
 
   <section class="hero" id="home">
-    <div class="founding-pill">
-      <span class="founding-pill-dot"></span>
-      Now accepting founding clients · Q2 2026
-    </div>
+    <div class="founding-pill"><span class="founding-pill-dot"></span>Now accepting founding clients · Q2 2026</div>
     <p class="hero-label">Luxury AI Brand Operating System</p>
     <h1 class="hero-title">
       Premium brands don't<br/>
       market harder.<br/>
       They operate <em>smarter.</em>
     </h1>
-    <p class="hero-sub">
-      We design the system beneath your brand — identity, narrative, automation, and conversion — built as one cohesive architecture.
-    </p>
+    <p class="hero-sub">We design the system beneath your brand — identity, narrative, automation, and conversion — built as one cohesive architecture.</p>
     <div class="hero-actions">
-      <a href="#contact" class="btn-ink">Book a Strategy Call</a>
-      <a href="#services" class="btn-ghost">View Services</a>
+      <a href="strategy-session.html" class="btn-ink">Book a Strategy Call</a>
+      <a href="#what" class="btn-ghost">See How It Works</a>
     </div>
     <div class="hero-stats">
-      <div class="hstat">
-        <div class="hstat-n">10+</div>
-        <div class="hstat-l">Years inside<br/>premium brands</div>
-      </div>
+      <div class="hstat"><div class="hstat-n">10+</div><div class="hstat-l">Years inside<br/>premium brands</div></div>
       <div class="hstat-div"></div>
-      <div class="hstat">
-        <div class="hstat-n">3</div>
-        <div class="hstat-l">Build tiers,<br/>one architecture</div>
-      </div>
+      <div class="hstat"><div class="hstat-n">3</div><div class="hstat-l">Build tiers,<br/>one architecture</div></div>
       <div class="hstat-div"></div>
-      <div class="hstat">
-        <div class="hstat-n">4</div>
-        <div class="hstat-l">Premium<br/>industries served</div>
-      </div>
+      <div class="hstat"><div class="hstat-n">4</div><div class="hstat-l">Premium<br/>industries served</div></div>
     </div>
   </section>
 
-  <!-- TICKER -->
+  <!-- 2. TICKER -->
 
   <div class="ticker">
     <div class="ticker-track">
@@ -595,49 +498,53 @@ footer {
     </div>
   </div>
 
-  <!-- WHAT WE DO -->
+  <!-- 3. OUR STORY — trust before pitch -->
 
-  <section class="section" id="what">
+  <section class="section" id="story">
     <div class="inner">
       <div class="reveal">
-        <span class="eyebrow">What We Do</span>
-        <h2 class="h2">Where others build campaigns,<br/>MODA builds <em>infrastructure.</em></h2>
-        <p class="lead">We design, build, and maintain intelligent brand systems for premium businesses in real estate, aesthetics, fashion, and lifestyle.</p>
+        <span class="eyebrow">Our Story</span>
+        <h2 class="h2">Built from the <em>inside out.</em></h2>
       </div>
-      <div class="what-grid reveal">
-        <div class="wcard">
-          <div class="wc-n">01</div>
-          <div class="wc-t">Brand Architecture</div>
-          <div class="wc-b">We design the foundational logic of your brand — positioning, voice, identity, and the emotional promise that makes your market choose you over everyone else.</div>
-        </div>
-        <div class="wcard">
-          <div class="wc-n">02</div>
-          <div class="wc-t">Narrative Systems</div>
-          <div class="wc-b">We build the story infrastructure that governs how your brand speaks across every channel — consistently, compellingly, without your constant involvement.</div>
-        </div>
-        <div class="wcard">
-          <div class="wc-n">03</div>
-          <div class="wc-t">AI Content Engine</div>
-          <div class="wc-b">We integrate AI into your content workflow so your brand generates demand consistently — without chasing the algorithm or building a content team.</div>
-        </div>
-        <div class="wcard">
-          <div class="wc-n">04</div>
-          <div class="wc-t">Automation & Conversion</div>
-          <div class="wc-b">We design the loops that connect content to conversion — DM flows, email sequences, booking systems — so the system works while you don't.</div>
+      <div class="story-cols reveal">
+        <blockquote class="story-quote">"Most brands are missing the foundation. We built MODA to be exactly that — the architecture premium brands are missing."</blockquote>
+        <div class="story-body">
+          <p>MODA was founded by a corporate buyer with over a decade inside the world's most recognized premium brands — <strong>GUESS, Dillard's, and Neiman Marcus</strong>. Not in marketing. In operations. Managing multimillion-dollar categories. Negotiating globally. Making decisions that directly moved revenue.</p>
+          <p>That experience revealed a consistent truth: <strong>most brands are spending on noise</strong>. Content goes out. Ads run. But underneath, there is no real system. No architecture that compounds.</p>
+          <p>MODA closes that gap — built at the intersection of <strong>brand strategy, cultural intelligence, and AI systems engineering.</strong></p>
+          <span class="story-tag">10+ years inside premium retail</span>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- POSITIONING -->
+  <!-- 4. WHAT WE DO -->
 
-  <section class="section alt" id="positioning">
+  <section class="section alt" id="what">
+    <div class="inner">
+      <div class="reveal">
+        <span class="eyebrow">What We Do</span>
+        <h2 class="h2">Where others build campaigns,<br/>MODA builds <em>infrastructure.</em></h2>
+        <p class="lead">Identity, narrative, content, and automation — designed as one system, not four separate tools.</p>
+      </div>
+      <div class="what-grid reveal">
+        <div class="wcard"><div class="wc-n">01</div><div class="wc-t">Brand Architecture</div><div class="wc-b">The foundational logic of your brand — positioning, voice, identity, and the emotional promise that makes your market choose you.</div></div>
+        <div class="wcard"><div class="wc-n">02</div><div class="wc-t">Narrative Systems</div><div class="wc-b">The story infrastructure that governs how your brand speaks across every channel — consistently, without your constant involvement.</div></div>
+        <div class="wcard"><div class="wc-n">03</div><div class="wc-t">AI Content Engine</div><div class="wc-b">AI integrated into your content workflow so demand generates consistently — without chasing the algorithm or building a team.</div></div>
+        <div class="wcard"><div class="wc-n">04</div><div class="wc-t">Automation & Conversion</div><div class="wc-b">The loops that connect content to conversion — DM flows, email sequences, booking systems — running while you don't.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. CATEGORY OF ONE -->
+
+  <section class="section" id="positioning">
     <div class="inner">
       <div class="reveal">
         <span class="eyebrow">Our Position</span>
         <h2 class="h2">A category of <em>one.</em></h2>
       </div>
-      <div class="pos-cols reveal">
+      <div class="pos-strip reveal">
         <div class="pcol">
           <div class="pc-lbl">What MODA is not</div>
           <ul class="pc-list">
@@ -648,7 +555,7 @@ footer {
             <li>Another subscription tool</li>
           </ul>
         </div>
-        <div class="pcol highlight">
+        <div class="pcol dark">
           <div class="pc-lbl">What MODA is</div>
           <ul class="pc-list">
             <li>A Brand Operating System — intelligent infrastructure</li>
@@ -662,22 +569,44 @@ footer {
     </div>
   </section>
 
-  <!-- SERVICES -->
+  <!-- 6. MID-PAGE CTA — strategy session -->
 
-  <section class="section" id="services">
+  <div class="mid-cta" id="session">
+    <div class="inner">
+      <div class="reveal">
+        <span class="eyebrow">Strategy Session</span>
+        <h2 class="mid-cta-title">Before we build, we need<br/>to understand what you're <em>building.</em></h2>
+        <p class="mid-cta-sub">A paid, one-hour diagnostic. Not a consultation — a clear-eyed assessment of where your brand stands and exactly what it requires.</p>
+        <div class="mid-cta-actions">
+          <a href="strategy-session.html" class="btn-gold">Apply for a Strategy Session</a>
+          <a href="#services" class="btn-cream-ghost">View Build Packages</a>
+        </div>
+        <p class="mid-cta-note">$500–$1,000 · Applied in full toward your build · 4 sessions per month</p>
+      </div>
+      <div class="session-covers reveal">
+        <div class="sc-card"><div class="sc-num">01</div><div class="sc-title">Brand Position Audit</div><div class="sc-body">Where you are positioned and what that positioning is costing you.</div></div>
+        <div class="sc-card"><div class="sc-num">02</div><div class="sc-title">Narrative Gap Analysis</div><div class="sc-body">The specific points at which you lose premium clients.</div></div>
+        <div class="sc-card"><div class="sc-num">03</div><div class="sc-title">System Readiness</div><div class="sc-body">Whether your infrastructure can support a build right now.</div></div>
+        <div class="sc-card"><div class="sc-num">04</div><div class="sc-title">Architecture Recommendation</div><div class="sc-body">One clear tier recommendation with rationale. Not a menu.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 7. BUILD PACKAGES -->
+
+  <section class="section alt" id="services">
     <div class="inner">
       <div class="reveal center">
         <span class="eyebrow">Build Packages</span>
         <h2 class="h2">Three tiers. One <em>architecture.</em></h2>
-        <p class="lead">Every engagement begins with a build. Select the scope that matches where your brand is today.</p>
+        <p class="lead">Every engagement begins with a build. The right tier is determined during your strategy session.</p>
       </div>
       <div class="tiers reveal">
         <div class="tier">
           <div class="t-num">Tier 01</div>
           <div class="t-name">Essential</div>
           <div class="t-tag">Brand clarity before execution.</div>
-          <div class="t-price">$3,500+</div>
-          <div class="t-pnote">One-time build engagement</div>
+          <div class="t-pnote">Investment discussed during strategy session</div>
           <div class="t-rule"></div>
           <ul class="t-list">
             <li>Brand Authority Framework</li>
@@ -687,15 +616,14 @@ footer {
             <li>Brand voice & messaging architecture</li>
             <li>Content angle framework</li>
           </ul>
-          <a href="#contact" class="t-btn">Apply for Essential</a>
+          <a href="strategy-session.html" class="t-btn">Apply for Essential</a>
         </div>
         <div class="tier feat">
           <div class="feat-badge">Most Selected</div>
           <div class="t-num">Tier 02</div>
           <div class="t-name">Growth</div>
           <div class="t-tag">A system that generates leads consistently.</div>
-          <div class="t-price">$7,500+</div>
-          <div class="t-pnote">One-time build engagement</div>
+          <div class="t-pnote">Investment discussed during strategy session</div>
           <div class="t-rule"></div>
           <ul class="t-list">
             <li>Everything in Essential</li>
@@ -705,14 +633,13 @@ footer {
             <li>DM automation flow</li>
             <li>Case study & offer assets</li>
           </ul>
-          <a href="#contact" class="t-btn">Apply for Growth</a>
+          <a href="strategy-session.html" class="t-btn">Apply for Growth</a>
         </div>
         <div class="tier">
           <div class="t-num">Tier 03</div>
           <div class="t-name">Signature</div>
           <div class="t-tag">A fully integrated brand ecosystem.</div>
-          <div class="t-price">$18,000+</div>
-          <div class="t-pnote">One-time build engagement</div>
+          <div class="t-pnote">Investment discussed during strategy session</div>
           <div class="t-rule"></div>
           <ul class="t-list">
             <li>Everything in Growth</li>
@@ -722,118 +649,40 @@ footer {
             <li>Campaign logic & seasonal frameworks</li>
             <li>Growth roadmap & handoff plan</li>
           </ul>
-          <a href="#contact" class="t-btn">Apply for Signature</a>
+          <a href="strategy-session.html" class="t-btn">Apply for Signature</a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- RETAINERS -->
+  <!-- 8. PROCESS -->
 
-  <section class="section alt" id="retainers">
-    <div class="inner">
-      <div class="reveal center">
-        <span class="eyebrow">Monthly Retainers</span>
-        <h2 class="h2">The ongoing <em>intelligence layer.</em></h2>
-        <p class="lead">After your build, retainers keep your system evolving. Not maintenance — ongoing strategy that compounds.</p>
-      </div>
-      <div class="ret-grid reveal">
-        <div class="rcard">
-          <div class="r-tier">System Oversight</div>
-          <div class="r-name">Maintenance + Advisory</div>
-          <div class="r-price">$1,500<span style="font-size:1rem">/mo</span></div>
-          <div class="r-note">Post-build · Advisory only</div>
-          <div class="r-rule"></div>
-          <div class="r-body">Monthly strategy call · System health check · Refinements & recommendations</div>
-        </div>
-        <div class="rcard">
-          <div class="r-tier">Content & Optimization</div>
-          <div class="r-name">Strategy + Execution</div>
-          <div class="r-price">$3,000<span style="font-size:1rem">/mo</span></div>
-          <div class="r-note">Post-build · Active oversight</div>
-          <div class="r-rule"></div>
-          <div class="r-body">Bi-weekly reviews · Content audit · Optimization & performance reporting</div>
-        </div>
-        <div class="rcard">
-          <div class="r-tier">Full Scale Partnership</div>
-          <div class="r-name">Full Operating Partnership</div>
-          <div class="r-price">$6,000<span style="font-size:1rem">/mo</span></div>
-          <div class="r-note">High-touch · Limited seats</div>
-          <div class="r-rule"></div>
-          <div class="r-body">Weekly oversight · Campaign logic · Automation updates · Full growth planning</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- STORY -->
-
-  <section class="section" id="story">
-    <div class="inner">
-      <div class="reveal">
-        <span class="eyebrow">Our Story</span>
-        <h2 class="h2">Built from the <em>inside out.</em></h2>
-      </div>
-      <div class="story-grid reveal">
-        <div class="sl">
-          <blockquote>"Most brands are missing the foundation. We built MODA to be exactly that — the architecture premium brands are missing."</blockquote>
-          <p>MODA was founded by a corporate buyer with over a decade inside the world's most recognized premium brands — <strong>GUESS, Dillard's, and Neiman Marcus</strong>. Not in marketing. In operations. Managing multimillion-dollar categories. Negotiating globally. Making decisions that directly moved revenue.</p>
-          <p>That experience revealed a consistent truth: <strong>most brands are spending on noise</strong>. Content goes out. Ads run. But underneath, there is no real system. No architecture that compounds over time.</p>
-          <p>MODA closes that gap — built at the intersection of <strong>brand strategy, cultural intelligence, and AI systems engineering.</strong></p>
-        </div>
-
-```
-  </div>
-</div>
-```
-
-  </section>
-
-  <!-- PROCESS -->
-
-  <section class="section alt" id="process">
+  <section class="section" id="process">
     <div class="inner">
       <div class="reveal center">
         <span class="eyebrow">How It Works</span>
         <h2 class="h2">A process built for <em>precision.</em></h2>
       </div>
       <div class="proc-grid reveal">
-        <div class="pstep">
-          <div class="ps-n">01</div>
-          <div class="ps-t">Discovery & Inquiry</div>
-          <div class="ps-b">MODA does not pursue — it attracts. First contact triggers an inquiry, not a pitch. We evaluate fit before any conversation begins.</div>
-        </div>
-        <div class="pstep">
-          <div class="ps-n">02</div>
-          <div class="ps-t">Intake & Qualification</div>
-          <div class="ps-b">A structured intake evaluates business stage, asset readiness, and strategic alignment. Not every inquiry becomes a client.</div>
-        </div>
-        <div class="pstep">
-          <div class="ps-n">03</div>
-          <div class="ps-t">Strategy Session</div>
-          <div class="ps-b">The first paid touchpoint. We define current position, desired position, and the exact architecture required to close that gap.</div>
-        </div>
-        <div class="pstep">
-          <div class="ps-n">04</div>
-          <div class="ps-t">Build & Activation</div>
-          <div class="ps-b">Phased and milestone-driven. No phase advances without client approval. System activation includes full documentation and handoff.</div>
-        </div>
+        <div class="pstep"><div class="ps-n">01</div><div class="ps-t">Discovery & Inquiry</div><div class="ps-b">MODA does not pursue — it attracts. First contact triggers an inquiry, not a pitch.</div></div>
+        <div class="pstep"><div class="ps-n">02</div><div class="ps-t">Intake & Qualification</div><div class="ps-b">A structured intake evaluates business stage, asset readiness, and strategic alignment.</div></div>
+        <div class="pstep"><div class="ps-n">03</div><div class="ps-t">Strategy Session</div><div class="ps-b">The first paid touchpoint. Current position, desired position, and the architecture to close that gap.</div></div>
+        <div class="pstep"><div class="ps-n">04</div><div class="ps-t">Build & Activation</div><div class="ps-b">Phased and milestone-driven. No phase advances without client approval.</div></div>
       </div>
     </div>
   </section>
 
-  <!-- CTA -->
+  <!-- 9. FINAL CTA -->
 
-  <section class="cta-section" id="contact">
+  <section class="cta-final" id="contact">
     <div class="inner center">
       <span class="eyebrow reveal">Limited Engagements Available</span>
       <h2 class="h2 reveal">Ready to stop marketing<br/>and start <em>building?</em></h2>
       <p class="lead reveal">We work with a selective roster of premium clients. Revenue-generating, asset-ready, and serious about building something structural.</p>
       <div class="reveal" style="margin-top:40px">
-        <a href="mailto:modastudio.ai@gmail.com" class="btn-ink" style="background:var(--gold);padding:16px 44px;font-size:0.85rem;">Book a Strategy Call</a>
+        <a href="strategy-session.html" class="btn-ink" style="background:var(--gold);padding:16px 44px;font-size:0.85rem;border-radius:100px;">Book a Strategy Call</a>
       </div>
-      <div class="cta-founding reveal">Now accepting founding clients · Q2 2026 · Founding rates available</div>
-      <p class="cta-note reveal">Selective intake · Premium clients only · Strategy sessions are paid engagements</p>
+      <p class="cta-final-note reveal">Selective intake · Premium clients only · Strategy sessions are paid engagements</p>
     </div>
   </section>
 
@@ -841,7 +690,7 @@ footer {
 
   <footer>
     <div class="f-logo">MODA Studio.AI</div>
-    <div class="f-mid">© 2025 MODA STUDIO.AI · All rights reserved<br/>Luxury AI Brand Operating System</div>
+    <div class="f-mid">© 2026 MODA STUDIO.AI · All rights reserved<br/>Luxury AI Brand Operating System</div>
     <div class="f-email"><a href="mailto:modastudio.ai@gmail.com">modastudio.ai@gmail.com</a></div>
   </footer>
 
