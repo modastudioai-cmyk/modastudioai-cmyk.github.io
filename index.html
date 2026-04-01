@@ -12,7 +12,6 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
 
-```
 body {
   background: #f5f0e8;
   color: #1c1a15;
@@ -323,7 +322,7 @@ nav {
 .sc-body { font-size: 0.95rem; line-height: 1.75; color: rgba(245,240,232,0.72); }
 
 /* TIERS */
-.tiers { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: #d5ccb8; margin-top: 52px; border: 1px solid #d5ccb8; }
+.tiers { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; width: 100%; margin-top: 52px; }
 .tier { background: #f5f0e8; padding: 52px 42px; display: flex; flex-direction: column; transition: background 0.2s; position: relative; }
 .tier:hover { background: #ede7d9; }
 .tier-feat { background: #f5f0e8; padding: 52px 42px; display: flex; flex-direction: column; position: relative; border: 2px solid #9a7c4a; margin: -1px; z-index: 1; transition: background 0.2s; }
@@ -397,7 +396,6 @@ footer { background: #18160f; border-top: 1px solid rgba(245,240,232,0.08); padd
   .session-covers { grid-template-columns: 1fr; }
   .h2-dark, .h2-light { font-size: 1.85rem; }
 }
-```
 
   </style>
 </head>
@@ -549,7 +547,7 @@ footer { background: #18160f; border-top: 1px solid rgba(245,240,232,0.08); padd
         <p class="lead-light">A paid, one-hour diagnostic. Not a consultation — a clear-eyed assessment of where your brand stands and exactly what it requires to perform at the level you're positioned for.</p>
         <div style="margin-top:36px;display:flex;gap:16px;flex-wrap:wrap;">
           <a href="strategy-session.html" class="btn-gold">Apply for a Strategy Session</a>
-          <a href="#services" class="btn-ghost-light">View Build Packages →</a>
+          <a href="#services" class="btn-ghost-light">View Build Systems →</a>
         </div>
         <p style="margin-top:20px;font-size:0.85rem;color:rgba(245,240,232,0.5);letter-spacing:0.04em;">$500 – $1,000 · Applied in full toward your build · 4 sessions per month</p>
       </div>
@@ -562,64 +560,59 @@ footer { background: #18160f; border-top: 1px solid rgba(245,240,232,0.08); padd
     </div>
   </section>
 
-  <!-- 7. BUILD PACKAGES -->
+  <!-- 7. BUILD SYSTEMS -->
 
   <section class="sec-alt" id="services">
     <div class="inner">
       <div class="reveal center">
-        <span class="eyebrow">Build Packages</span>
-        <h2 class="h2-dark">Three tiers. One <em>architecture.</em></h2>
-        <p class="lead-dark">Every engagement begins with a build. The right tier is determined during your strategy session.</p>
+        <span class="eyebrow">Build Systems</span>
+        <h2 class="h2-dark">Three build systems. One <em>operating architecture.</em></h2>
+        <p class="lead-dark">Each tier represents implementation depth inside the same MODA operating system.</p>
       </div>
-      <div class="tiers reveal">
-        <div class="tier">
+      <div class="tiers">
+        <div class="tier" data-tier-key="essential">
           <div class="t-num">Tier 01</div>
-          <div class="t-name">Essential</Identity System>
-          <div class="t-tag">Brand clarity before execution.</div>
-          <div class="t-pnote">Investment discussed during strategy session</div>
+          <div class="t-name" data-tier-field="name">Identity System</div>
+          <div class="t-tag">Foundational architecture installed before scale.</div>
           <div class="t-rule"></div>
           <ul class="t-list">
-            <li>Brand Authority Framework</li>
-            <li>Positioning &amp; emotional promise</li>
-            <li>Cultural positioning strategy</li>
-            <li>Audience identity mapping</li>
-            <li>Brand voice &amp; messaging architecture</li>
-            <li>Content angle framework</li>
+            <li>Brand authority framework and positioning logic</li>
+            <li>Audience identity map and premium decision triggers</li>
+            <li>Voice system and narrative command structure</li>
+            <li>Messaging architecture for consistent channel output</li>
+            <li>Content direction blueprint for execution clarity</li>
           </ul>
           <a href="strategy-session.html" class="t-btn">Apply for Identity System</a>
         </div>
-        <div class="tier-feat">
-          <div class="feat-badge">Most Selected</div>
+
+        <div class="tier" data-tier-key="growth">
           <div class="t-num">Tier 02</div>
-          <div class="Brand Engine"</div>
-          <div class="t-tag">A system that generates leads consistently.</div>
-          <div class="t-pnote">Investment discussed during strategy session</div>
-          <div class="t-rule-gold"></div>
-          <ul class="t-list">
-            <li>Everything in Identity System</li>
-            <li>AI Content Engine (30-day system)</li>
-            <li>Caption framework &amp; idea bank</li>
-            <li>Lead magnet strategy</li>
-            <li>DM automation flow</li>
-            <li>Case study &amp; offer assets</li>
-          </ul>
-          <a href="strategy-session.html" class="t-btn-gold">Apply for Growth</a>
-        </div>
-        <div class="tier">
-          <div class="t-num">Tier 03</div>
-          <div class="t-name">Signature</div>
-          <div class="t-tag">A fully integrated brand ecosystem.</div>
-          <div class="t-pnote">Investment discussed during strategy session</div>
+          <div class="t-name" data-tier-field="name">Brand Engine</div>
+          <div class="t-tag">Demand architecture connecting narrative to conversion.</div>
           <div class="t-rule"></div>
           <ul class="t-list">
-            <li>Everything in Growth</li>
-            <li>Full system architecture design</li>
-            <li>Automation loops (content → CRM → email)</li>
-            <li>AI scale strategy</li>
-            <li>Campaign logic &amp; seasonal frameworks</li>
-            <li>Growth roadmap &amp; handoff plan</li>
+            <li>Everything in Identity System</li>
+            <li>AI content engine configured for repeatable production</li>
+            <li>Offer-to-content framework and conversion message matrix</li>
+            <li>Lead capture and inbound DM automation flows</li>
+            <li>Sales asset system for proof, trust, and qualification</li>
           </ul>
-          <a href="strategy-session.html" class="t-btn">Apply for Signature</a>
+          <a href="strategy-session.html" class="t-btn">Apply for Brand Engine</a>
+        </div>
+
+        <div class="tier" data-tier-key="signature">
+          <div class="t-num">Tier 03</div>
+          <div class="t-name" data-tier-field="name">Full Operating System</div>
+          <div class="t-tag">Installed infrastructure across brand, content, and revenue operations.</div>
+          <div class="t-rule"></div>
+          <ul class="t-list">
+            <li>Everything in Brand Engine</li>
+            <li>End-to-end operating architecture and orchestration layer</li>
+            <li>Connected automation across content, CRM, and email</li>
+            <li>Governance model for quality and AI-assisted scale</li>
+            <li>Operator handoff protocols and control dashboards</li>
+          </ul>
+          <a href="strategy-session.html" class="t-btn">Apply for Full Operating System</a>
         </div>
       </div>
     </div>
@@ -665,16 +658,41 @@ footer { background: #18160f; border-top: 1px solid rgba(245,240,232,0.08); padd
   </footer>
 
   <script>
-    const els = document.querySelectorAll('.reveal');
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach((e, i) => {
-        if (e.isIntersecting) {
-          setTimeout(() => e.target.classList.add('in'), i * 55);
-          io.unobserve(e.target);
-        }
+    const TIER_DISPLAY_MAP = {
+      essential: {
+        name: 'Identity System'
+      },
+      growth: {
+        name: 'Brand Engine'
+      },
+      signature: {
+        name: 'Full Operating System'
+      }
+    };
+
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('[data-tier-key]').forEach((tierCard) => {
+        const tierKey = tierCard.dataset.tierKey;
+        const mapping = TIER_DISPLAY_MAP[tierKey];
+        if (!mapping) return;
+
+        tierCard.querySelectorAll('[data-tier-field]').forEach((fieldNode) => {
+          const field = fieldNode.dataset.tierField;
+          if (mapping[field]) fieldNode.textContent = mapping[field];
+        });
       });
-    }, { threshold: 0.06 });
-    els.forEach(el => io.observe(el));
+
+      const els = document.querySelectorAll('.reveal');
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((e, i) => {
+          if (e.isIntersecting) {
+            setTimeout(() => e.target.classList.add('in'), i * 55);
+            io.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.06 });
+      els.forEach(el => io.observe(el));
+    });
   </script>
 
 </body>
