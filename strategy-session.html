@@ -266,6 +266,9 @@
           </p>
         </div>
 
+        <div id="turnstile-wrap" class="field" style="margin-top: 8px;" hidden>
+          <div id="turnstile-widget"></div>
+        </div>
         <div class="error" id="form-error"></div>
         <div class="row">
           <button class="btn btn-light" type="button" id="prev-btn" hidden>Back</button>
@@ -282,25 +285,28 @@
     </section>
   </main>
 
-  <!-- Optional: intake-config.js sets MODA_STRATEGY_INTAKE_WEBHOOK_SECRET (see intake-config.example.js) -->
+  <!-- intake-config.js: endpoint + public Turnstile site key only (never webhook secrets) -->
   <script src="intake-config.js"></script>
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" async defer></script>
   <script>
     const isLocal =
       window.location.hostname === 'localhost' ||
       window.location.hostname === '127.0.0.1';
 
-    // Production: Supabase Edge Function (public-safe). Set full URL in intake-config.js.
+    // Production: Supabase Edge Function (canonical). Set full URL in intake-config.js.
     const STRATEGY_INTAKE_EDGE_PATH = '/functions/v1/strategy-intake-submit';
     const STRATEGY_INTAKE_ENDPOINT = isLocal
-      ? 'http://localhost:3001/api/webhooks/strategy-intake'
+      ? (window.MODA_STRATEGY_INTAKE_ENDPOINT ||
+          (window.MODA_SUPABASE_FUNCTIONS_ORIGIN
+            ? `${String(window.MODA_SUPABASE_FUNCTIONS_ORIGIN).replace(/\/$/, '')}${STRATEGY_INTAKE_EDGE_PATH}`
+            : ''))
       : (window.MODA_SUPABASE_FUNCTIONS_ORIGIN
           ? `${String(window.MODA_SUPABASE_FUNCTIONS_ORIGIN).replace(/\/$/, '')}${STRATEGY_INTAKE_EDGE_PATH}`
           : '');
 
     window.MODA_STRATEGY_INTAKE_ENDPOINT =
       window.MODA_STRATEGY_INTAKE_ENDPOINT || STRATEGY_INTAKE_ENDPOINT;
-    window.MODA_STRATEGY_INTAKE_WEBHOOK_SECRET =
-      window.MODA_STRATEGY_INTAKE_WEBHOOK_SECRET ?? '';
+    window.MODA_TURNSTILE_SITE_KEY = window.MODA_TURNSTILE_SITE_KEY || '';
   </script>
 
   <script>
@@ -312,6 +318,8 @@
     };
     const maxStep = 4;
     let currentStep = 1;
+    let turnstileWidgetId = null;
+    let turnstileToken = '';
 
     const form = document.getElementById('qualification-form');
     const panel = document.getElementById('application-panel');
@@ -322,6 +330,7 @@
     const nextBtn = document.getElementById('next-btn');
     const submitBtn = document.getElementById('submit-btn');
     const errorEl = document.getElementById('form-error');
+    const turnstileWrap = document.getElementById('turnstile-wrap');
 
     const OFFER_DISPLAY_MAP = {
       essential: { name: 'Identity System' },
@@ -336,6 +345,30 @@
       return `sub_${Date.now()}_${Math.random().toString(36).slice(2, 10)}`;
     }
 
+    function getTurnstileSiteKey() {
+      return String(window.MODA_TURNSTILE_SITE_KEY || '').trim();
+    }
+
+    function ensureTurnstileWidget() {
+      const siteKey = getTurnstileSiteKey();
+      if (!siteKey) return;
+      turnstileWrap.hidden = false;
+      if (turnstileWidgetId != null) return;
+      if (!window.turnstile || typeof window.turnstile.render !== 'function') return;
+      turnstileWidgetId = window.turnstile.render('#turnstile-widget', {
+        sitekey: siteKey,
+        callback: (token) => {
+          turnstileToken = String(token || '');
+        },
+        'expired-callback': () => {
+          turnstileToken = '';
+        },
+        'error-callback': () => {
+          turnstileToken = '';
+        }
+      });
+    }
+
     function showStep(step) {
       currentStep = step;
       form.querySelectorAll('.step').forEach((el) => {
@@ -347,6 +380,7 @@
       nextBtn.hidden = step === maxStep;
       submitBtn.hidden = step !== maxStep;
       errorEl.textContent = '';
+      if (step === maxStep) ensureTurnstileWidget();
     }
 
     function validateCurrentStep() {
@@ -374,9 +408,8 @@
         throw new Error('Intake endpoint not configured.');
       }
 
-      const secret = String(window.MODA_STRATEGY_INTAKE_WEBHOOK_SECRET || '').trim();
+      // Phase 1: public browser auth is Turnstile token only (no shared webhook header).
       const headers = { 'Content-Type': 'application/json' };
-      if (secret) headers['x-webhook-secret'] = secret;
 
       let response;
       try {
@@ -398,6 +431,14 @@
       event.preventDefault();
       if (!validateCurrentStep()) return;
       errorEl.textContent = '';
+
+      const siteKey = getTurnstileSiteKey();
+      ensureTurnstileWidget();
+      if (siteKey && !turnstileToken) {
+        errorEl.textContent = 'Please complete the verification challenge before submitting.';
+        return;
+      }
+
       submitBtn.disabled = true;
       submitBtn.textContent = 'Submitting...';
 
@@ -420,6 +461,9 @@
         recommended_tier: selectedTierKey,
         source: 'website_strategy_session'
       };
+      if (turnstileToken) {
+        payload.turnstile_token = turnstileToken;
+      }
 
       try {
         await submitQualification(payload);
@@ -428,6 +472,10 @@
         window.scrollTo({ top: 0, behavior: 'smooth' });
       } catch (err) {
         errorEl.textContent = err instanceof Error ? err.message : 'Unable to submit right now. Please try again.';
+        turnstileToken = '';
+        if (window.turnstile && turnstileWidgetId != null) {
+          try { window.turnstile.reset(turnstileWidgetId); } catch (_) { /* ignore */ }
+        }
       } finally {
         submitBtn.disabled = false;
         submitBtn.textContent = 'Submit Application';
@@ -439,6 +487,10 @@
     if (tierKey && OFFER_DISPLAY_MAP[tierKey]) {
       document.getElementById('selected_tier_key').value = tierKey;
     }
+
+    window.addEventListener('load', () => {
+      if (currentStep === maxStep) ensureTurnstileWidget();
+    });
 
     showStep(1);
   </script>
