@@ -1,128 +1,225 @@
+/**
+ * SOFORTH public Pages behavior.
+ * Static port of Stage 2E reveal, intelligence loop, Company Memory accumulation,
+ * and Dots / Connections from commit 74d3c2cc3bb246cf5521e54950c8ab39bb22d529.
+ * Presentation only. No intake, no network, no chat client.
+ */
 (function () {
-      var world = document.getElementById("world");
-      var guide = document.getElementById("guide");
-      var guideName = document.getElementById("guide-name");
-      var guideCount = document.getElementById("guide-count");
-      var guideRoom = document.getElementById("guide-room");
-      var guideLinks = document.querySelectorAll("[data-guide-link]");
-      var names = { entrance: "Entrance", studio: "The Studio", partnership: "Partnership" };
-      var counts = { entrance: "01", studio: "02", partnership: "03" };
-      var steps = { entrance: "1", studio: "2", partnership: "3" };
-      var pairs = {
-        entrance: [["#studio", "The Studio is next"], ["#partnership", "Partnership"]],
-        studio: [["#entrance", "Entrance"], ["#partnership", "Partnership is next"]],
-        partnership: [["#studio", "The Studio"], ["#entrance", "Entrance"]]
-      };
-      var seen = { entrance: 0, studio: 0, partnership: 0 };
-      var current = "";
-      var lock = false;
+  'use strict';
 
-      function reduced() {
-        return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      }
+  var reduceQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
 
-      function setGuide(id) {
-        if (!pairs[id] || id === current) return;
-        current = id;
-        guide.dataset.step = steps[id];
-        guideCount.textContent = counts[id];
-        guideName.textContent = names[id];
-        guideLinks[0].setAttribute("href", pairs[id][0][0]);
-        guideLinks[0].textContent = pairs[id][0][1];
-        guideLinks[1].setAttribute("href", pairs[id][1][0]);
-        guideLinks[1].textContent = pairs[id][1][1];
-        var room = document.getElementById(id);
-        room.classList.remove("is-arriving");
-        window.requestAnimationFrame(function () {
-          room.classList.add("is-arriving");
-        });
-      }
+  function reduced() {
+    return reduceQuery.matches;
+  }
 
-      function scrollToRoom(id) {
-        lock = true;
-        setGuide(id);
-        var behavior = reduced() ? "auto" : "smooth";
-        if (id === "entrance") world.scrollTo({ top: 0, behavior: behavior });
-        else document.getElementById(id).scrollIntoView({ behavior: behavior, block: "start" });
-        window.setTimeout(function () { lock = false; }, reduced() ? 40 : 850);
-      }
+  function setYear() {
+    var year = document.getElementById('s2e-year');
+    if (year) year.textContent = String(new Date().getFullYear());
+  }
 
-      function focusGuide() {
-        guideRoom.focus({ preventScroll: true });
-      }
+  function initReveal() {
+    var nodes = document.querySelectorAll('.stage2e-reveal');
+    if (!nodes.length) return;
 
-      window.addEventListener("hashchange", function () {
-        var id = location.hash.replace("#", "") || "entrance";
-        if (!pairs[id]) return;
-        scrollToRoom(id);
-        window.setTimeout(focusGuide, 0);
+    if (reduced()) {
+      nodes.forEach(function (el) {
+        el.classList.add('is-in');
       });
+      return;
+    }
 
-      document.addEventListener("click", function (event) {
-        var link = event.target.closest("a[href^='#']");
-        if (!link) return;
-        var id = link.getAttribute("href").slice(1);
-        if (!pairs[id]) return;
-        window.setTimeout(focusGuide, 0);
-      });
-
-      function keepsArrowKeys(target) {
-        if (!target || !target.closest) return false;
-        if (target.closest("input, textarea, select, [contenteditable='true']")) return true;
-        var named = target.closest("[role]");
-        if (!named) return false;
-        var role = named.getAttribute("role");
-        return role === "slider" || role === "spinbutton" || role === "listbox" || role === "option" || role === "menu" || role === "menuitem" || role === "combobox" || role === "textbox";
+    var pending = [];
+    nodes.forEach(function (el) {
+      var rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight * 0.92 && rect.bottom > 0) {
+        el.classList.add('is-in');
+        return;
       }
+      pending.push(el);
+    });
 
-      document.addEventListener("keydown", function (event) {
-        var target = event.target;
-        var behavior = reduced() ? "auto" : "smooth";
-        if (event.key === "ArrowDown" || event.key === "ArrowUp") {
-          if (keepsArrowKeys(target)) return;
-          event.preventDefault();
-          world.scrollBy({ top: event.key === "ArrowDown" ? 56 : -56, behavior: behavior });
-          return;
-        }
-        if (target.closest && target.closest("a, button, input, textarea, select")) return;
-        if (event.key === "Home") {
-          event.preventDefault();
-          world.scrollTo({ top: 0, behavior: behavior });
-        } else if (event.key === "End") {
-          event.preventDefault();
-          world.scrollTo({ top: world.scrollHeight, behavior: behavior });
-        } else if (event.key === " " || event.key === "Spacebar") {
-          event.preventDefault();
-          world.scrollBy({ top: (event.shiftKey ? -1 : 1) * world.clientHeight * 0.86, behavior: behavior });
-        } else if (event.key === "PageDown" || event.key === "PageUp") {
-          event.preventDefault();
-          world.scrollBy({ top: (event.key === "PageDown" ? 1 : -1) * world.clientHeight * 0.86, behavior: behavior });
-        }
-      });
+    if (!pending.length) return;
 
-      var observer = new IntersectionObserver(function (entries) {
+    var io = new IntersectionObserver(
+      function (entries) {
         entries.forEach(function (entry) {
-          seen[entry.target.id] = entry.isIntersecting ? entry.intersectionRect.height : 0;
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add('is-in');
+          io.unobserve(entry.target);
         });
-        if (lock) return;
-        var best = "";
-        var height = 0;
-        Object.keys(seen).forEach(function (id) {
-          if (seen[id] > height) {
-            height = seen[id];
-            best = id;
-          }
-        });
-        if (best) setGuide(best);
-      }, { root: world, threshold: [0, 0.15, 0.35, 0.55, 0.75, 1] });
+      },
+      { threshold: 0.12, rootMargin: '0px 0px -6% 0px' }
+    );
 
-      Object.keys(pairs).forEach(function (id) {
-        observer.observe(document.getElementById(id));
+    pending.forEach(function (el) {
+      io.observe(el);
+    });
+  }
+
+  function initLoop() {
+    var root = document.querySelector('[data-stage2e-loop]');
+    if (!root) return;
+    var steps = Array.prototype.slice.call(root.querySelectorAll('.stage2e-loop-step'));
+    var fill = root.querySelector('[data-stage2e-loop-fill]');
+    var kicker = root.querySelector('[data-stage2e-loop-kicker]');
+    var note = root.querySelector('[data-stage2e-loop-note]');
+    if (!steps.length) return;
+
+    function paint(active) {
+      steps.forEach(function (step, index) {
+        step.setAttribute('data-active', index <= active ? 'true' : 'false');
+        step.setAttribute('data-current', index === active ? 'true' : 'false');
       });
+      if (fill) fill.style.width = ((active + 1) / steps.length) * 100 + '%';
+      var current = steps[active];
+      if (current && kicker) kicker.textContent = current.querySelector('.stage2e-loop-label').textContent;
+      if (current && note) note.textContent = current.getAttribute('data-note') || '';
+    }
 
-      var opening = location.hash.replace("#", "");
-      if (pairs[opening]) {
-        document.getElementById(opening).scrollIntoView({ behavior: "auto", block: "start" });
-        setGuide(opening);
-      }
-    })();
+    if (reduced()) {
+      paint(steps.length - 1);
+      return;
+    }
+
+    paint(0);
+
+    var started = false;
+    var io = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting || started) return;
+          started = true;
+          io.disconnect();
+          var i = 0;
+          paint(0);
+          var id = window.setInterval(function () {
+            i += 1;
+            if (i >= steps.length) {
+              window.clearInterval(id);
+              paint(steps.length - 1);
+              return;
+            }
+            paint(i);
+          }, 700);
+        });
+      },
+      { threshold: 0.25 }
+    );
+    io.observe(root);
+  }
+
+  function initMemory() {
+    var root = document.querySelector('[data-stage2e-memory]');
+    if (!root) return;
+    var chips = Array.prototype.slice.call(root.querySelectorAll('.stage2e-memory-chip'));
+    var meta = root.querySelector('[data-stage2e-memory-meta]');
+    var list = root.querySelector('.stage2e-memory-accum__list');
+    if (!chips.length) return;
+
+    function paint(count) {
+      chips.forEach(function (chip, index) {
+        var on = index < count;
+        chip.classList.toggle('is-in', on);
+        chip.setAttribute('data-on', on ? 'true' : 'false');
+      });
+      if (meta) meta.textContent = 'Context retained · ' + count + ' of ' + chips.length;
+    }
+
+    if (reduced()) {
+      paint(chips.length);
+      return;
+    }
+
+    paint(0);
+    if (!list) return;
+
+    var io = new IntersectionObserver(
+      function (entries) {
+        if (!entries.some(function (entry) { return entry.isIntersecting; })) return;
+        io.disconnect();
+        var n = 0;
+        var timer = window.setInterval(function () {
+          n += 1;
+          paint(n);
+          if (n >= chips.length) window.clearInterval(timer);
+        }, 220);
+      },
+      { threshold: 0.3 }
+    );
+    io.observe(list);
+  }
+
+  function initDots() {
+    var root = document.querySelector('[data-stage2e-dots]');
+    if (!root) return;
+    var dots = Array.prototype.slice.call(root.querySelectorAll('.stage2e-dot'));
+    var labels = Array.prototype.slice.call(root.querySelectorAll('.stage2e-dot-label'));
+    var lines = Array.prototype.slice.call(root.querySelectorAll('line'));
+    var phase = root.querySelector('[data-stage2e-dots-phase]');
+
+    function showDots(count) {
+      dots.forEach(function (dot, index) {
+        dot.classList.toggle('is-in', index < count);
+      });
+      labels.forEach(function (label, index) {
+        label.classList.toggle('is-in', index < count);
+      });
+    }
+
+    function showLines(count) {
+      lines.forEach(function (line, index) {
+        line.classList.toggle('is-on', index < count);
+      });
+    }
+
+    function setPhase(text) {
+      if (phase) phase.textContent = text;
+    }
+
+    if (reduced()) {
+      showDots(dots.length);
+      showLines(lines.length);
+      setPhase('What looks isolated today may become a pattern tomorrow.');
+      return;
+    }
+
+    showDots(0);
+    showLines(0);
+    setPhase('Isolated at first.');
+
+    var io = new IntersectionObserver(
+      function (entries) {
+        if (!entries.some(function (entry) { return entry.isIntersecting; })) return;
+        io.disconnect();
+        var n = 0;
+        var timer = window.setInterval(function () {
+          n += 1;
+          showDots(n);
+          if (n >= dots.length) {
+            window.clearInterval(timer);
+            setPhase('Relationships begin to appear.');
+            var L = 0;
+            timer = window.setInterval(function () {
+              L += 1;
+              showLines(L);
+              if (L >= lines.length) {
+                window.clearInterval(timer);
+                setPhase('What looks isolated today may become a pattern tomorrow.');
+              }
+            }, 380);
+          }
+        }, 480);
+      },
+      { threshold: 0.35 }
+    );
+    io.observe(root);
+  }
+
+  document.documentElement.classList.add('js-motion');
+  setYear();
+  initReveal();
+  initLoop();
+  initMemory();
+  initDots();
+})();
