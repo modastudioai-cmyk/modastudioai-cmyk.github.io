@@ -66,23 +66,37 @@
         window.setTimeout(focusGuide, 0);
       });
 
+      function keepsArrowKeys(target) {
+        if (!target || !target.closest) return false;
+        if (target.closest("input, textarea, select, [contenteditable='true']")) return true;
+        var named = target.closest("[role]");
+        if (!named) return false;
+        var role = named.getAttribute("role");
+        return role === "slider" || role === "spinbutton" || role === "listbox" || role === "option" || role === "menu" || role === "menuitem" || role === "combobox" || role === "textbox";
+      }
+
       document.addEventListener("keydown", function (event) {
-        var amounts = { ArrowDown: 56, ArrowUp: -56, PageDown: world.clientHeight * 0.86, PageUp: world.clientHeight * -0.86 };
         var target = event.target;
-        if (target.closest("a, button, input, textarea, select")) return;
-        if (world.contains(target)) return;
+        var behavior = reduced() ? "auto" : "smooth";
+        if (event.key === "ArrowDown" || event.key === "ArrowUp") {
+          if (keepsArrowKeys(target)) return;
+          event.preventDefault();
+          world.scrollBy({ top: event.key === "ArrowDown" ? 56 : -56, behavior: behavior });
+          return;
+        }
+        if (target.closest && target.closest("a, button, input, textarea, select")) return;
         if (event.key === "Home") {
           event.preventDefault();
-          world.scrollTo({ top: 0, behavior: reduced() ? "auto" : "smooth" });
+          world.scrollTo({ top: 0, behavior: behavior });
         } else if (event.key === "End") {
           event.preventDefault();
-          world.scrollTo({ top: world.scrollHeight, behavior: reduced() ? "auto" : "smooth" });
+          world.scrollTo({ top: world.scrollHeight, behavior: behavior });
         } else if (event.key === " " || event.key === "Spacebar") {
           event.preventDefault();
-          world.scrollBy({ top: (event.shiftKey ? -1 : 1) * world.clientHeight * 0.86, behavior: reduced() ? "auto" : "smooth" });
-        } else if (amounts[event.key]) {
+          world.scrollBy({ top: (event.shiftKey ? -1 : 1) * world.clientHeight * 0.86, behavior: behavior });
+        } else if (event.key === "PageDown" || event.key === "PageUp") {
           event.preventDefault();
-          world.scrollBy({ top: amounts[event.key], behavior: reduced() ? "auto" : "smooth" });
+          world.scrollBy({ top: (event.key === "PageDown" ? 1 : -1) * world.clientHeight * 0.86, behavior: behavior });
         }
       });
 

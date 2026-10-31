@@ -322,6 +322,16 @@ a { color: inherit; }
   line-height: 0.95;
 }
 .note { padding: 0.2rem 1.15rem 1.3rem; color: var(--quiet); font-size: 14px; }
+.contact { padding: 0.2rem 1.2rem 1.6rem; }
+.contact a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: var(--ink);
+  font-size: 15px;
+  text-decoration: underline;
+  text-underline-offset: 0.22em;
+}
 
 .partner { background: var(--bone); }
 .partner__block,
