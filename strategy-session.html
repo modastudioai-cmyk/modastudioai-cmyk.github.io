@@ -276,6 +276,11 @@
             <textarea id="what_business_sells" name="what_business_sells" required></textarea>
           </div>
           <div class="field">
+            <label for="competitors">Who do your clients compare you to?</label>
+            <p class="field-guidance">Name two or three businesses, with a website or Instagram for each. Include one brand you admire, even if it’s outside your industry or area.</p>
+            <textarea id="competitors" name="competitors" required></textarea>
+          </div>
+          <div class="field">
             <label for="current_business_stage">Current business stage</label>
             <select id="current_business_stage" name="current_business_stage" required>
               <option value="">Select stage</option>
@@ -502,6 +507,7 @@
         website: String(data.website || '').trim(),
         instagram: String(data.instagram || '').trim(),
         what_business_sells: String(data.what_business_sells || '').trim(),
+        competitors: String(data.competitors || '').trim(),
         current_business_stage: String(data.current_business_stage || '').trim(),
         biggest_current_bottleneck: String(data.biggest_current_bottleneck || '').trim(),
         what_they_want_help_with: String(data.what_they_want_help_with || '').trim(),
