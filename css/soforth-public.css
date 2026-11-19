@@ -1230,3 +1230,68 @@ a { color: inherit; }
 @media (max-width: 1072px) {
   .page-studio .site-foot { padding-inline: 1.15rem; }
 }
+
+/* ------------------------------------------------------------------
+   Studio, 19 Nov (b): the hero bleeds to the edge like "See it";
+   "One identity" closes the page as its mirror; dark cards soften
+   to a warm espresso instead of near-black.
+   ------------------------------------------------------------------ */
+:root { --espresso: #2e2520; }
+.page-studio #story { width: 100%; max-width: none; }
+.page-studio .opener { border-bottom: 0; }
+.page-studio .opener img { height: 62vw; max-height: 420px; }
+
+/* Closing band: same treatment, image on the other side. */
+.page-studio .expression--close {
+  border-top: 1px solid var(--line-a);
+  background: var(--bone);
+}
+.page-studio .expression--close figure { height: 62vw; max-height: 360px; }
+.page-studio .expression--close .expression__copy { padding: 1.6rem var(--gutter) 2.2rem; }
+
+@media (min-width: 900px) {
+  .page-studio .opener,
+  .page-studio .expression--close { container-type: inline-size; }
+  .page-studio .opener {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+    min-height: min(76vh, 660px);
+    align-items: stretch;
+  }
+  .page-studio .opener img { height: 100%; max-height: none; min-height: 460px; }
+  .page-studio .opener figcaption {
+    justify-content: center;
+    padding: 3rem max(1.15rem, calc((100cqw - 1040px) / 2)) 3rem 3.2rem;
+  }
+  .page-studio .opener h1 { font-size: clamp(2.6rem, 3.6vw, 3.4rem); line-height: 1.02; }
+
+  .page-studio .expression--close {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+    min-height: min(64vh, 560px);
+    align-items: stretch;
+  }
+  .page-studio .expression--close figure { order: 2; height: auto; max-height: none; min-height: 420px; }
+  .page-studio .expression--close figure { position: relative; }
+  .page-studio .expression--close img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 60%;
+  }
+  .page-studio .expression--close .expression__copy {
+    order: 1;
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 3rem 3.2rem 3rem max(1.15rem, calc((100cqw - 1040px) / 2));
+  }
+  .page-studio .expression--close .expression__line { font-size: clamp(2.6rem, 3.8vw, 3.6rem); }
+}
+
+/* Softer dark: warm espresso for both cards. */
+.page-studio .talk__card,
+.page-studio .learn__ask { background: var(--espresso); }
