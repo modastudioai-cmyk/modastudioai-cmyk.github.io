@@ -1088,7 +1088,7 @@ a { color: inherit; }
 /* With motion: each reason lights up its part of the reply as you scroll. */
 .learn.is-live .learn__hl { background-size: 0% 2px; transition: background-size 0.6s ease; }
 .learn.is-live .learn__hl.is-on { background-size: 100% 2px; }
-.learn.is-live .learn__why li { opacity: 0.38; transition: opacity 0.4s ease; }
+.learn.is-live .learn__why li { opacity: 0.5; transition: opacity 0.4s ease; }
 .learn.is-live .learn__why li.is-on { opacity: 1; }
 
 .learn__path { position: relative; margin-top: 2.8rem; }
@@ -1137,4 +1137,96 @@ a { color: inherit; }
 @media print {
   .learn .learn__why li { opacity: 1 !important; }
   .learn .learn__hl { background-size: 100% 2px !important; }
+}
+
+/* ------------------------------------------------------------------
+   Studio page cohesion, 19 Nov 2026.
+   One section system: every section runs full width with its content
+   in the same 1040px column, separated by one hairline in alpha ink
+   (blends on bone and sand alike). Backgrounds alternate bone / sand.
+   ------------------------------------------------------------------ */
+:root {
+  --line-a: rgba(28, 26, 21, 0.12);
+  --sand: #efe8dc;
+  --gutter: max(1.15rem, calc((100% - 1040px) / 2));
+}
+.page-studio #story { border-bottom: 0; }
+.page-studio .opener { border-bottom: 1px solid var(--line-a); }
+.page-studio .practice,
+.page-studio .learn,
+.page-studio .services,
+.page-studio .talk { border-top: 1px solid var(--line-a); }
+.page-studio .learn { background: var(--sand); }
+
+/* Services: no inset box; same column and rhythm as the other sections. */
+.page-studio .services {
+  padding: 3.2rem var(--gutter) 2.8rem;
+  background: var(--bone);
+}
+.page-studio .services .partner__paths { padding: 0; }
+.page-studio .services .aside { border-top-color: var(--line-a); }
+
+/* Let's talk: one dark card, the same family as the Ask Soforth card. */
+.page-studio .talk {
+  padding: 3.2rem var(--gutter) 3.6rem;
+  background: var(--sand);
+}
+.talk__card {
+  display: grid;
+  gap: 2rem;
+  padding: 1.8rem 1.25rem 1.6rem;
+  background: var(--ink);
+  color: var(--bone);
+  border-top: 3px solid var(--orange);
+}
+.talk__main h2 {
+  margin-top: 0.55rem;
+  max-width: 11em;
+  color: var(--bone);
+  font-family: Newsreader, Georgia, serif;
+  font-weight: 500;
+  font-size: clamp(2.3rem, 4.4vw, 3.6rem);
+  letter-spacing: -0.035em;
+  line-height: 0.98;
+}
+.talk__main .body { margin-top: 0.9rem; max-width: 30em; }
+.talk__steps { margin-top: 0.7rem; padding: 0; list-style: none; }
+.talk__steps li {
+  display: grid;
+  grid-template-columns: 2.2rem minmax(0, 1fr);
+  gap: 0.15rem 0.6rem;
+  padding: 0.8rem 0;
+  border-top: 1px solid rgba(245, 240, 232, 0.16);
+}
+.talk__steps span { color: #e3a07c; font-size: 12px; letter-spacing: 0.12em; padding-top: 0.35rem; }
+.talk__steps strong { color: var(--bone); font-family: Newsreader, Georgia, serif; font-weight: 500; font-size: 1.2rem; }
+.talk__steps em {
+  grid-column: 2;
+  color: rgba(245, 240, 232, 0.72);
+  font-style: normal;
+  font-size: 14px;
+  line-height: 1.5;
+}
+.learn__ask { border-top: 3px solid var(--orange); }
+
+/* Concentric corners on the example phone: inner radius = outer radius − padding. */
+.learn__phone { --r: 30px; --pad: 9px; border-radius: var(--r); padding: var(--pad) var(--pad) 0.9rem; }
+.learn__phone-head { border-radius: calc(var(--r) - var(--pad)) calc(var(--r) - var(--pad)) 0 0; }
+
+@media (min-width: 900px) {
+  .talk__card {
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+    gap: 3.2rem;
+    padding: 2.8rem 2.6rem 2.4rem;
+  }
+  .talk__next { padding-top: 0.2rem; }
+}
+/* Services: column dividers run the full height of the row. */
+@media (min-width: 720px) {
+  .page-studio .ways { align-items: stretch; }
+  .page-studio .ways__item + .ways__item { box-shadow: inset 1px 0 0 var(--line-a); }
+}
+.page-studio .site-foot { padding-inline: 0; }
+@media (max-width: 1072px) {
+  .page-studio .site-foot { padding-inline: 1.15rem; }
 }
