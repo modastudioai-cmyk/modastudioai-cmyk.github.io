@@ -16,7 +16,14 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&amp;family=Newsreader:ital,opsz,wght@0,6..72,500;1,6..72,500&amp;display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/css/soforth-public.css?v=88728e0" />
+  <link rel="stylesheet" href="/css/soforth-public.css?v=sf1119" />
+  <script>
+    /* Browsers without cross-page view transitions get a short fade instead. */
+    if (!("onpagereveal" in window)) document.documentElement.classList.add("no-xvt");
+  </script>
+  <script type="speculationrules">
+    { "prerender": [{ "source": "list", "urls": ["/studio/"], "eagerness": "moderate" }] }
+  </script>
 </head>
 <body class="page-entrance">
   <a class="skip" href="#promise">Skip to the entrance</a>
@@ -25,12 +32,28 @@
       <div class="entrance__copy">
         <p class="wordmark">SOFORTH</p>
         <h1 class="statement" id="promise" tabindex="-1">A Creative Company for What’s Next.</h1>
-        <a class="enter" href="/studio/">Enter Soforth</a>
+        <a class="enter" href="/studio/"><span>Enter Soforth</span><span class="enter__arrow" aria-hidden="true">→</span></a>
       </div>
       <figure class="entrance__visual">
         <img src="/images/connection.jpg" width="1280" height="720" alt="Bone and burnt orange sharing one curved edge." />
       </figure>
     </div>
   </header>
+  <script>
+    (function () {
+      var root = document.documentElement;
+      if (!root.classList.contains("no-xvt")) return;
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+      var enter = document.querySelector(".enter");
+      if (!enter) return;
+      enter.addEventListener("click", function (event) {
+        if (event.metaKey || event.ctrlKey || event.shiftKey || event.button !== 0) return;
+        event.preventDefault();
+        document.body.classList.add("is-leaving");
+        window.setTimeout(function () { window.location.href = enter.href; }, 420);
+      });
+      window.addEventListener("pageshow", function () { document.body.classList.remove("is-leaving"); });
+    })();
+  </script>
 </body>
 </html>
