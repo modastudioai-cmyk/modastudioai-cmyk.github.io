@@ -16,12 +16,13 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&amp;family=Newsreader:ital,opsz,wght@0,6..72,500;1,6..72,500&amp;display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/css/soforth-public.css?v=sf1120a" />
+  <link rel="stylesheet" href="/css/soforth-public.css?v=sf1120b" />
   <script>
     if (!("onpagereveal" in window)) document.documentElement.classList.add("no-xvt");
   </script>
 </head>
 <body class="page-studio">
+  <img class="brush-thread" src="/images/brush-stroke.webp" alt="" aria-hidden="true" width="864" height="373" data-brush-thread />
   <a class="skip" href="#story">Skip to the studio</a>
   <header class="site-head">
     <div class="site-head__inner">
@@ -48,6 +49,28 @@
 
 
     </article>
+
+    <section class="reel" id="reel" aria-labelledby="reel-title">
+      <h2 class="sr-only" id="reel-title">The work, in motion</h2>
+      <div class="reel__stage" data-reel-stage>
+        <div class="reel__device">
+          <div class="reel__screen" data-reel aria-hidden="true">
+            <div class="reel__frame rf-intro is-on" data-glow="#efe8dc" data-hold="1500"><p><em>a brand, in fifteen seconds</em></p><i></i></div>
+            <div class="reel__frame rf-field" data-glow="#b65a32" data-hold="700"></div>
+            <div class="reel__frame rf-word" data-glow="#b65a32" data-hold="1100"><b>CLARITY</b></div>
+            <div class="reel__frame rf-pattern" data-glow="#c7a27c" data-hold="1300"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+            <div class="reel__frame rf-dot" data-glow="#3a2a20" data-hold="900"><i></i></div>
+            <div class="reel__frame rf-type" data-glow="#efe8dc" data-hold="1200"><b>Aa</b><p>Newsreader <span>/</span> Inter</p></div>
+            <div class="reel__frame rf-palette" data-glow="#9a8f7e" data-hold="1200"><i style="--c:#1c1a15"><span>Ink</span></i><i style="--c:#b65a32"><span>Ember</span></i><i style="--c:#d5ccb8"><span>Sand</span></i><i style="--c:#f5f0e8"><span>Bone</span></i></div>
+            <div class="reel__frame rf-post" data-glow="#8a7660" data-hold="1500"><img src="/assets/moda-chapter-room.jpg" alt="" loading="lazy" /><p class="rf-post__mark">MAISON LUNE</p><p class="rf-post__lead"><em>glow that</em></p><p class="rf-post__caps">LASTS ALL SEASON</p></div>
+            <div class="reel__frame rf-cal" data-glow="#efe8dc" data-hold="1300"><p class="rf-cal__m">December</p><div><i class="on">IG</i><i class="on">TT</i><i></i><i class="on">IN</i><i class="on">IG</i><i class="on">PIN</i><i class="on">IG</i><i></i><i class="on today">Today</i><i class="on">TT</i></div></div>
+            <div class="reel__frame rf-end" data-glow="#f5f0e8" data-hold="3200"><b>Soforth</b><p>FOUNDER-LED BRANDS</p></div>
+          </div>
+          <div class="reel__base"></div>
+        </div>
+      </div>
+      <p class="reel__caption">Strategy, identity, content and systems. One brand, carried everywhere.</p>
+    </section>
 
     <section class="practice" id="practice" aria-labelledby="practice-title">
       <p class="kicker">Who it is for</p>
@@ -326,6 +349,7 @@
   </main>
   <script src="/js/soforth-tour.js?v=sf1119d" defer></script>
   <script src="/js/soforth-capacity.js?v=sf1120a" defer></script>
+  <script src="/js/soforth-reel.js?v=sf1120b" defer></script>
   <footer class="site-foot">
     <a href="/">Entrance</a>
   </footer>
