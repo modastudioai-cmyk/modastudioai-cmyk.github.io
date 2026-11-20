@@ -1458,3 +1458,12 @@ a { color: inherit; }
 .learn--stage .tour::before { content: ""; position: absolute; inset: 2rem -10% -2rem; pointer-events: none; background: radial-gradient(38% 46% at 28% 52%, color-mix(in srgb, var(--glow) 20%, transparent), transparent 100%); transition: background 0.5s ease; }
 @media (max-width: 899px) { .learn--stage .tour::before { background: radial-gradient(70% 30% at 50% 30%, color-mix(in srgb, var(--glow) 22%, transparent), transparent 100%); } }
 .learn--stage .tour > * { position: relative; }
+
+/* Entrance: a light touch of gloss. The orange image lights the room; the wordmark sits on a glossy surface. */
+.page-entrance .entrance__copy { position: relative; isolation: isolate; }
+.page-entrance .entrance__copy::before { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; background: linear-gradient(to bottom, rgba(182, 90, 50, 0.2), rgba(182, 90, 50, 0.05) 32%, transparent 60%); }
+.page-entrance .wordmark { margin-bottom: 0.42em; -webkit-box-reflect: below 2px linear-gradient(to bottom, transparent 62%, rgba(255, 255, 255, 0.16)); }
+@supports not (-webkit-box-reflect: below 0) { .page-entrance .wordmark { margin-bottom: 0; } }
+@media (min-width: 720px) {
+  .page-entrance .entrance__copy::before { background: radial-gradient(95% 130% at 100% 50%, rgba(182, 90, 50, 0.18), rgba(182, 90, 50, 0.06) 40%, transparent 85%); }
+}
