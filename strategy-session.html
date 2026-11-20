@@ -79,6 +79,7 @@
       letter-spacing: -0.03em;
       line-height: 1.05;
     }
+    .capacity-line { margin: 0.75rem 0 0; font-size: 0.95rem; color: #a8532e; }
     .lead {
       margin-top: 1rem;
       max-width: 38em;
@@ -231,7 +232,8 @@
 
   <main class="wrap">
     <span class="eyebrow">Strategy Session</span>
-    <h1>Apply for a Soforth Strategy Session</h1>
+    <h1 data-capacity-waitlist="Join the Soforth waitlist">Apply for a Soforth Strategy Session</h1>
+    <p class="capacity-line" data-capacity-line hidden></p>
     <p class="lead">
       Tell us about the business. We review each inquiry for fit before any scheduling or payment. If approved, the Strategy Session is $500, credited toward your package.
       Sending this form does not create a client account or Portal access, and it does not start a paid engagement.
@@ -328,7 +330,7 @@
         <div class="row">
           <button class="btn btn-light" type="button" id="prev-btn" hidden>Back</button>
           <button class="btn btn-dark" type="button" id="next-btn">Continue</button>
-          <button class="btn btn-dark" type="submit" id="submit-btn" hidden>Submit Application</button>
+          <button class="btn btn-dark" type="submit" id="submit-btn" hidden data-capacity-waitlist="Join the Waitlist">Submit Application</button>
         </div>
       </form>
     </section>
@@ -336,12 +338,14 @@
     <section class="status" id="submitted-state">
       <h2>Application received.</h2>
       <p>Thank you. Every application is read personally.</p>
+      <p class="hint" data-capacity-waitlist="You’re on the waitlist. We’ll write as soon as a place opens."></p>
       <p class="hint">If it’s a fit, you’ll hear from us at the email you gave.</p>
     </section>
   </main>
 
   <!-- intake-config.js: endpoint + public Turnstile site key only (never webhook secrets) -->
   <script src="intake-config.js"></script>
+  <script src="/js/soforth-capacity.js?v=sf1120a" defer></script>
   <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" async defer></script>
   <script>
     const isLocal =
@@ -515,7 +519,7 @@
         why_applying_now: String(data.why_applying_now || '').trim(),
         selected_tier_key: selectedTierKey,
         recommended_tier: selectedTierKey,
-        source: 'website_strategy_session'
+        source: window.SOFORTH_CAPACITY && window.SOFORTH_CAPACITY.open === false ? 'website_waitlist' : 'website_strategy_session'
       };
       if (turnstileToken) {
         payload.turnstile_token = turnstileToken;
