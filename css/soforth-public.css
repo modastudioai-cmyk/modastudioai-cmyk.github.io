@@ -1434,19 +1434,27 @@ a { color: inherit; }
 .learn--stage .tour__why strong { color: #f5f0e8; }
 .learn--stage .tour__tier { color: #d4a27f; }
 
-.tour__device { position: relative; margin-bottom: 3.2rem; -webkit-box-reflect: below 12px linear-gradient(to bottom, transparent 62%, rgba(255, 255, 255, 0.16)); }
+.tour__device { position: relative; margin-bottom: 3.2rem; -webkit-box-reflect: below 12px linear-gradient(to bottom, transparent 55%, rgba(255, 255, 255, 0.28)); }
 .tour__screen { position: relative; aspect-ratio: 16 / 11; display: grid; place-items: center; overflow: hidden; border: 9px solid #121110; border-radius: 12px 12px 4px 4px; background: #f5f0e8; box-shadow: 0 0 0 1px #2a2723, 0 0 90px -6px color-mix(in srgb, var(--glow) 30%, transparent), 0 28px 70px -24px color-mix(in srgb, var(--glow) 45%, transparent); }
 .tour__base { height: 11px; margin: 0 -5%; border-radius: 0 0 14px 14px; background: linear-gradient(#2b2925, #151412); box-shadow: 0 16px 26px -16px rgba(0, 0, 0, 0.9); }
 .tour__screen .tour__mock { width: 78%; max-height: 92%; overflow: hidden; zoom: 0.8; box-shadow: none; }
 .tour__screen .tour__mock.learn__phone { width: 64%; zoom: 0.66; }
-.tour__mock--sig { display: grid; place-items: center; gap: 0.6rem; width: auto !important; padding: 0 1rem; background: none; border: 0; text-align: center; overflow: visible !important; zoom: 1 !important; white-space: nowrap; }
-.tour__mock--sig b { font-family: Newsreader, Georgia, serif; font-weight: 500; font-style: italic; font-size: clamp(3rem, 7vw, 4.6rem); line-height: 1; }
-.tour__mock--sig p { margin: 0; padding-top: 0.6rem; border-top: 1px solid var(--ink); font-size: 11px; letter-spacing: 0.32em; }
+.tour__mock--sig { display: grid; justify-items: start; gap: 1rem; width: auto !important; padding: 0 1rem; background: none; border: 0; overflow: visible !important; zoom: 1 !important; }
+.tour__mock--sig b { font-family: Newsreader, Georgia, serif; font-weight: 500; font-size: clamp(2.6rem, 6.4vw, 4.4rem); letter-spacing: -0.045em; line-height: 0.88; }
+.tour__mock--sig p { margin: 0; font-family: Inter, Helvetica, Arial, sans-serif; font-weight: 400; font-size: clamp(0.72rem, 1.5vw, 0.95rem); letter-spacing: 0.11em; line-height: 1.6; color: #3c3832; }
 @media (min-width: 900px) {
   .learn--stage .tour__slide { grid-template-columns: minmax(0, 520px) minmax(0, 1fr); gap: 3.5rem; }
 }
 @media (max-width: 899px) {
-  .tour__mock--sig b { font-size: 2.6rem; }
-  .tour__mock--sig p { font-size: 9px; letter-spacing: 0.24em; }
   .learn--stage .tour__slide { padding: 2rem 14px 2.5rem; }
+  .learn--stage .tour__device { margin-bottom: 6rem; }
+  .tour__screen { box-shadow: 0 0 0 1px #2a2723, 0 18px 40px -20px color-mix(in srgb, var(--glow) 40%, transparent); }
 }
+
+/* Gloss: a soft glare across each screen, a lit edge on the base, and a room glow that takes the screen's color */
+.tour__screen::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(115deg, rgba(255, 255, 255, 0.22) 0%, rgba(255, 255, 255, 0.06) 26%, rgba(255, 255, 255, 0) 44%); mix-blend-mode: screen; }
+.tour__base { background: linear-gradient(#4a4640 0, #2b2925 2px, #151412 100%); }
+.learn--stage .tour { position: relative; --glow: #d5ccb8; }
+.learn--stage .tour::before { content: ""; position: absolute; inset: 2rem -10% -2rem; pointer-events: none; background: radial-gradient(38% 46% at 28% 52%, color-mix(in srgb, var(--glow) 20%, transparent), transparent 100%); transition: background 0.5s ease; }
+@media (max-width: 899px) { .learn--stage .tour::before { background: radial-gradient(70% 30% at 50% 30%, color-mix(in srgb, var(--glow) 22%, transparent), transparent 100%); } }
+.learn--stage .tour > * { position: relative; }

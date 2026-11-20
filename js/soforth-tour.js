@@ -43,6 +43,9 @@
     prev.disabled = i <= 0;
     next.disabled = i >= slides.length - 1;
     dots.forEach(function (d, k) { d.classList.toggle("is-on", k === i); d.setAttribute("aria-current", k === i ? "true" : "false"); });
+    var dev = slides[i].querySelector(".tour__device");
+    var glow = dev && dev.style.getPropertyValue("--glow");
+    if (glow) root.style.setProperty("--glow", glow.trim());
   }
   prev.addEventListener("click", function () { go(index() - 1); });
   next.addEventListener("click", function () { go(index() + 1); });
