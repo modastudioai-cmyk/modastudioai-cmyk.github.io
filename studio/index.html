@@ -16,7 +16,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&amp;family=Newsreader:ital,opsz,wght@0,6..72,500;1,6..72,500&amp;display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/css/soforth-public.css?v=sf1120e" />
+  <link rel="stylesheet" href="/css/soforth-public.css?v=sf1123c" />
   <script>
     if (!("onpagereveal" in window)) document.documentElement.classList.add("no-xvt");
   </script>
@@ -36,8 +36,36 @@
 
   <main class="site-main">
     <article class="room" id="story" aria-labelledby="story-title">
-      <figure class="opener">
-        <img src="/images/editorial.jpg" width="1280" height="720" alt="Burnt orange ink bleeding into a bone field." />
+      <figure class="opener opener--stage">
+        <div class="opener__stage" role="img" aria-label="The Soforth client Portal on a laptop: a greeting, today's next step, today's list and the week ahead.">
+          <div class="tour__device opener__device" style="--glow:#b65a32">
+            <div class="tour__screen">
+              <div class="op-portal" aria-hidden="true">
+                <div class="op-portal__nav"><b>SOFORTH</b><span>Home</span><span>Brand</span><span>Content</span><span>Messages</span></div>
+                <div class="op-portal__hello">
+                  <p class="op-portal__date">MONDAY · NOVEMBER 23</p>
+                  <p class="op-portal__greet">Good evening, Atelier North.</p>
+                  <p class="op-portal__sub">Two things today, and your week is planned.</p>
+                </div>
+                <div class="op-portal__row">
+                  <div class="op-portal__next">
+                    <p class="op-portal__eye">DO NEXT · INSTAGRAM</p>
+                    <p class="op-portal__title">Today’s post is ready</p>
+                    <span class="op-portal__btn">OPEN TODAY’S POST</span>
+                  </div>
+                  <div class="op-portal__note"><p>Note to self</p><i></i><i></i><i></i></div>
+                </div>
+                <div class="op-portal__today">
+                  <p><span class="op-portal__box is-on"></span><s>Approve your Image World</s></p>
+                  <p><span class="op-portal__box"></span>Post “The table is set.”</p>
+                  <p><span class="op-portal__box"></span>Shoot two photos for Wednesday</p>
+                </div>
+                <div class="op-portal__week"><i class="is-today"></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+              </div>
+            </div>
+            <div class="tour__base"></div>
+          </div>
+        </div>
         <figcaption>
           <p class="kicker">The studio</p>
           <h1 id="story-title">Brand strategy, identity, and creative systems.</h1>
@@ -369,8 +397,16 @@
       </div>
     </section>
     <section class="expression expression--close" aria-label="One identity, expressed everywhere">
-      <figure data-reveal="media">
-        <img src="/images/brush.jpg" width="864" height="1152" alt="A single burnt orange brushstroke on bone." />
+      <figure class="brushglass" data-reveal="media">
+        <img src="/images/brush.jpg" width="864" height="1152" alt="A single burnt orange brushstroke on bone, under glass." />
+        <svg class="brushglass__defs" aria-hidden="true" focusable="false">
+          <filter id="sf-wet-paint" x="-5%" y="-5%" width="110%" height="110%">
+            <feTurbulence type="fractalNoise" baseFrequency="0.006 0.011" numOctaves="2" seed="7" result="noise">
+              <animate attributeName="baseFrequency" dur="18s" values="0.006 0.011;0.009 0.007;0.006 0.011" repeatCount="indefinite" />
+            </feTurbulence>
+            <feDisplacementMap in="SourceGraphic" in2="noise" scale="14" xChannelSelector="R" yChannelSelector="G" />
+          </filter>
+        </svg>
       </figure>
       <div class="expression__copy" data-reveal>
         <p class="expression__line">One identity,<br />expressed everywhere.</p>
