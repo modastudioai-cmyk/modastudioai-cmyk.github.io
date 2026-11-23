@@ -1536,3 +1536,109 @@ a { color: inherit; }
   0% { transform: translateX(-120%); }
   45%, 100% { transform: translateX(120%); }
 }
+
+/* ------------------------------------------------------------------
+   The lit stage, carried down the page (23 Nov 2026, founder: "What you
+   get to use" is the bar). Let's talk and the closing brushstroke sit on
+   the same dark stage as lit, glossy cards that rise into view; Pulse
+   becomes a polished card. Phones keep the gloss, glow and sheen.
+   ------------------------------------------------------------------ */
+.page-studio .talk,
+.page-studio .expression--close {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: #0c0b09;
+  border-top: 0;
+}
+.page-studio .talk::before,
+.page-studio .expression--close::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(46% 52% at 32% 46%, rgba(182, 90, 50, 0.22), transparent 100%);
+}
+.page-studio .expression--close::before { background: radial-gradient(48% 56% at 70% 50%, rgba(182, 90, 50, 0.24), transparent 100%); }
+.page-studio .talk { padding-bottom: 5.5rem; }
+
+/* Let's talk: a lit card that pops up. */
+.page-studio .talk__card {
+  position: relative;
+  overflow: hidden;
+  border-top: 0;
+  border-radius: 22px;
+  background: radial-gradient(120% 140% at 22% 0%, #3a2e26 0%, #1c1815 55%, #121110 100%);
+  box-shadow: 0 0 0 1px #2a2723, 0 0 90px -6px rgba(182, 90, 50, 0.3), 0 30px 70px -24px rgba(182, 90, 50, 0.55);
+  -webkit-box-reflect: below 14px linear-gradient(to bottom, transparent 78%, rgba(255, 255, 255, 0.1));
+}
+.page-studio .talk__card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(115deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.03) 26%, rgba(255, 255, 255, 0) 44%);
+  mix-blend-mode: screen;
+}
+.page-studio .talk__card > * { position: relative; z-index: 1; }
+.page-studio .talk__steps li {
+  margin-top: 0.6rem;
+  padding: 0.85rem 1rem;
+  border: 1px solid rgba(245, 240, 232, 0.09);
+  border-radius: 14px;
+  background: linear-gradient(180deg, rgba(245, 240, 232, 0.06), rgba(245, 240, 232, 0.02));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+.page-studio .talk__card.is-waiting { transform: translateY(26px) scale(0.965); }
+.page-studio .talk__card.is-waiting.is-in { transform: none; }
+@media (min-width: 900px) and (prefers-reduced-motion: no-preference) {
+  .page-studio .talk__card { transition: transform 0.6s cubic-bezier(0.22, 0.61, 0.16, 1), box-shadow 0.4s ease, opacity 0.6s ease; }
+  .page-studio .talk__card.is-in:hover,
+  .page-studio .talk__card:not(.is-waiting):hover {
+    transform: translateY(-4px);
+    box-shadow: 0 0 0 1px #3a342d, 0 0 110px -4px rgba(182, 90, 50, 0.4), 0 36px 80px -24px rgba(182, 90, 50, 0.65);
+  }
+}
+
+/* Closing band: the brushstroke as a lit pane of glass. */
+.page-studio .expression--close .expression__line { color: #f5f0e8; }
+.page-studio .expression--close .body { color: #d9cfbf; }
+.page-studio .expression--close figure.brushglass {
+  margin: 1.4rem var(--gutter) 3.4rem;
+  border-radius: 18px;
+  background: var(--bone);
+  box-shadow: 0 0 0 1px #2a2723, 0 0 90px -6px rgba(182, 90, 50, 0.32), 0 30px 70px -24px rgba(182, 90, 50, 0.6);
+  -webkit-box-reflect: below 12px linear-gradient(to bottom, transparent 62%, rgba(255, 255, 255, 0.2));
+}
+.page-studio .expression--close .expression__copy { padding-top: 0.4rem; }
+@media (min-width: 900px) {
+  .page-studio .expression--close figure.brushglass { margin: 3.4rem max(1.15rem, calc((100cqw - 1040px) / 2)) 4.6rem 0; min-height: 380px; }
+  .page-studio .expression--close .expression__copy { padding-top: 3rem; }
+}
+/* The sheen crosses the glass on phones too; only the paint drift is desktop-only. */
+@media (prefers-reduced-motion: no-preference) {
+  .brushglass::after { animation: sf-glass-sheen 7s ease-in-out 1.5s infinite; }
+}
+
+/* Pulse: a polished card that lifts off the page. */
+.page-studio .pulse__card {
+  position: relative;
+  overflow: hidden;
+  border: 0;
+  border-radius: 30px;
+  background: linear-gradient(180deg, #ffffff 0%, #fbf6ee 45%, #efe6d7 100%);
+  box-shadow: inset 0 1px 0 #ffffff, 0 30px 60px -34px rgba(28, 26, 21, 0.55), 0 10px 22px -16px rgba(182, 90, 50, 0.35);
+}
+.page-studio .pulse__card::after {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 30%;
+  pointer-events: none;
+  background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.7), transparent);
+  transform: translateX(-120%);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .page-studio .pulse__card::after { animation: sf-glass-sheen 9s ease-in-out 2s infinite; }
+}
