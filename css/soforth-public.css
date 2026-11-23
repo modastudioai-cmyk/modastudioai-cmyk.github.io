@@ -1467,3 +1467,72 @@ a { color: inherit; }
 @media (min-width: 720px) {
   .page-entrance .entrance__copy::before { background: radial-gradient(95% 130% at 100% 50%, rgba(182, 90, 50, 0.18), rgba(182, 90, 50, 0.06) 40%, transparent 85%); }
 }
+
+/* ------------------------------------------------------------------
+   Entrance plays by itself (23 Nov 2026): SOFORTH, then the line,
+   then it dissolves into the Studio. "Enter Soforth" stays as the
+   skip. Once per visit (sessionStorage), never on reduced motion.
+   ------------------------------------------------------------------ */
+.entrance__progress {
+  display: block;
+  width: min(220px, 60%);
+  height: 2px;
+  margin-top: 1.1rem;
+  background: rgba(245, 240, 232, 0.16);
+  overflow: hidden;
+}
+.entrance__progress i {
+  display: block;
+  height: 100%;
+  width: 100%;
+  background: var(--orange);
+  transform: scaleX(0);
+  transform-origin: left center;
+}
+.page-entrance.is-auto .entrance__progress i { animation: sf-progress var(--sf-hold, 3.2s) linear both; }
+.page-entrance.is-paused .entrance__progress { opacity: 0; }
+@keyframes sf-progress { to { transform: scaleX(1); } }
+
+@media (prefers-reduced-motion: no-preference) {
+  .page-entrance.is-auto .wordmark { animation: sf-play-in 0.9s 0.1s cubic-bezier(0.22, 0.61, 0.16, 1) both; }
+  .page-entrance.is-auto .statement { animation: sf-play-in 0.9s 0.75s cubic-bezier(0.22, 0.61, 0.16, 1) both; }
+  .page-entrance.is-auto .enter,
+  .page-entrance.is-auto .entrance__progress { animation: sf-play-in 0.7s 1.35s ease both; }
+}
+@keyframes sf-play-in {
+  from { opacity: 0; transform: translateY(10px); filter: blur(4px); }
+}
+.sr-live { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* ------------------------------------------------------------------
+   The brushstroke under glass (23 Nov 2026): the paint drifts slowly
+   (SVG displacement) and a soft sheen crosses the glass. Desktop with
+   motion only; phones and reduced motion keep the still image.
+   ------------------------------------------------------------------ */
+.brushglass { position: relative; overflow: hidden; isolation: isolate; }
+.brushglass img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.brushglass::before,
+.brushglass::after { content: ""; position: absolute; inset: 0; pointer-events: none; }
+/* Glass: a cool edge light and a faint inner rim. */
+.brushglass::before {
+  z-index: 2;
+  background:
+    linear-gradient(160deg, rgba(255, 255, 255, 0.28) 0%, rgba(255, 255, 255, 0.04) 22%, transparent 45%),
+    radial-gradient(120% 80% at 80% 110%, rgba(182, 90, 50, 0.16), transparent 60%);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.35), inset 0 -30px 60px -40px rgba(28, 26, 21, 0.35);
+}
+/* The sheen that crosses the glass. */
+.brushglass::after {
+  z-index: 3;
+  background: linear-gradient(105deg, transparent 35%, rgba(255, 255, 255, 0.38) 48%, rgba(255, 255, 255, 0.08) 54%, transparent 66%);
+  transform: translateX(-120%);
+}
+.brushglass__defs { position: absolute; width: 0; height: 0; }
+@media (min-width: 900px) and (prefers-reduced-motion: no-preference) {
+  .brushglass img { filter: url(#sf-wet-paint); transform: scale(1.04); }
+  .brushglass::after { animation: sf-glass-sheen 7s ease-in-out 1.5s infinite; }
+}
+@keyframes sf-glass-sheen {
+  0% { transform: translateX(-120%); }
+  45%, 100% { transform: translateX(120%); }
+}
