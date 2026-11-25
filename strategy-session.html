@@ -219,6 +219,8 @@
       .btn { width: 100%; }
       h1, .lead { overflow-wrap: break-word; }
     }
+    .legal-foot { width: min(760px, 100%); margin: 0 auto; padding: 0 22px 40px; display: flex; flex-wrap: wrap; gap: 4px 20px; font-size: 15px; color: #5c564c; }
+    .legal-foot a { display: inline-flex; align-items: center; min-height: 44px; color: #5c564c; }
   </style>
 </head>
 <body>
@@ -321,6 +323,9 @@
           <p class="hint">
             If Soforth is the right fit, you’ll receive the Strategy Session agreement, the $500 reservation, and a private scheduling link by email.
           </p>
+          <p class="hint">
+            We use your answers only to review your application and contact you about it. See our <a href="/privacy.html">Privacy Policy</a> and <a href="/terms.html">Terms</a>, including the session’s cancellation and refund terms.
+          </p>
         </div>
 
         <div id="turnstile-wrap" class="field" style="margin-top: 8px;" hidden>
@@ -342,6 +347,12 @@
       <p class="hint">If it’s a fit, you’ll hear from us at the email you gave.</p>
     </section>
   </main>
+  <footer class="legal-foot">
+    <span>Soforth LLC · Colorado</span>
+    <a href="mailto:hello@asksoforth.com">hello@asksoforth.com</a>
+    <a href="/privacy.html">Privacy</a>
+    <a href="/terms.html">Terms</a>
+  </footer>
 
   <!-- intake-config.js: endpoint + public Turnstile site key only (never webhook secrets) -->
   <script src="intake-config.js"></script>
