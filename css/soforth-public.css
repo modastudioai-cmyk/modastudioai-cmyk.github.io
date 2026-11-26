@@ -934,6 +934,7 @@ a { color: inherit; }
    Entrance → Studio: the Entrance dissolves into the Studio
    (cross-page view transitions). The wordmark and the hero image
    carry across; everything else dissolves. 19 Nov 2026.
+   25 Nov 2026: the brushstroke carries across into the Studio hero.
    ------------------------------------------------------------------ */
 @view-transition { navigation: auto; }
 @media (prefers-reduced-motion: reduce) {
@@ -941,22 +942,23 @@ a { color: inherit; }
 }
 .page-entrance .wordmark,
 .page-studio .site-head__mark { view-transition-name: sf-wordmark; }
-.page-entrance .entrance__visual,
-.page-studio .opener > img { view-transition-name: sf-hero; }
+.brushlive--entrance,
+.brushlive--hero { view-transition-name: sf-brush; }
 
+/* The brushstroke travels: the same stroke, so a plain cross-fade
+   while the group moves reads as one stroke moving into place. */
 ::view-transition-group(sf-wordmark),
-::view-transition-group(sf-hero) {
-  animation-duration: 1.05s;
+::view-transition-group(sf-brush) {
+  animation-duration: 1.1s;
   animation-timing-function: cubic-bezier(0.22, 0.61, 0.16, 1);
 }
-::view-transition-old(sf-hero),
-::view-transition-new(sf-hero) {
+::view-transition-old(sf-brush),
+::view-transition-new(sf-brush) {
   height: 100%;
-  object-fit: cover;
-  animation-duration: 1.05s;
+  object-fit: contain;
+  animation-duration: 1.1s;
+  animation-timing-function: cubic-bezier(0.22, 0.61, 0.16, 1);
 }
-::view-transition-old(sf-hero) { animation-name: sf-dissolve-out; }
-::view-transition-new(sf-hero) { animation-name: sf-dissolve-in; }
 ::view-transition-old(root) { animation: sf-dissolve-out 0.75s ease both; }
 ::view-transition-new(root) { animation: sf-rise-in 0.95s 0.12s cubic-bezier(0.22, 0.61, 0.16, 1) both; }
 @keyframes sf-dissolve-out {
@@ -1643,57 +1645,108 @@ a { color: inherit; }
   .page-studio .pulse__card::after { animation: sf-glass-sheen 9s ease-in-out 2s infinite; }
 }
 
-/* ------------------------------------------------------------------
-   Studio opener on the stage (23 Nov 2026): the page opens with the
-   client Portal lit up on a laptop, the same wow as "What you get".
-   ------------------------------------------------------------------ */
-.page-studio .opener--stage { position: relative; isolation: isolate; background: #0c0b09; color: var(--on-dark); border-bottom: 0; }
-.page-studio .opener--stage::before {
-  content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
-  background: radial-gradient(44% 58% at 30% 48%, rgba(182, 90, 50, 0.26), transparent 100%);
-}
-.page-studio .opener--stage .kicker { color: #d4a27f; }
-.page-studio .opener--stage h1 { color: #f5f0e8; }
-.page-studio .opener--stage .lede { color: #d9cfbf; }
-.page-studio .opener--stage figcaption .credo { color: #b8ad9c; }
-.opener__stage { display: grid; place-items: center; padding: 2rem 1.2rem 2.6rem; view-transition-name: sf-hero; }
-.opener__device { width: min(100%, 620px); margin-bottom: 0; -webkit-box-reflect: below 10px linear-gradient(to bottom, transparent 84%, rgba(255, 255, 255, 0.12)); }
-.opener__device .tour__screen { aspect-ratio: 16 / 11; place-items: stretch; }
-.op-portal { gap: 3%; }
-.op-portal__week i { height: 2.6em; }
-
-/* The Portal on the screen: Home, as clients see it. */
-.op-portal { display: flex; flex-direction: column; gap: 4%; padding: 3.2% 4%; height: 100%; box-sizing: border-box; background: #f5f0e8; color: #1c1a15; font-size: clamp(6px, 1.05vw, 11px); line-height: 1.25; }
-.op-portal__nav { display: flex; gap: 1.6em; align-items: center; padding-bottom: 0.9em; border-bottom: 1px solid #d5ccb8; color: #5c564c; }
-.op-portal__nav b { margin-right: auto; color: #1c1a15; font-family: Newsreader, Georgia, serif; font-weight: 500; letter-spacing: -0.04em; font-size: 1.4em; }
-.op-portal__hello { padding: 1.4em 1.8em; border-radius: 1.6em; background: linear-gradient(#ffffff, #f5f0e8); box-shadow: inset 0 1px 0 #fff, 0 1.4em 2.6em -1.6em rgba(28, 26, 21, 0.5); }
-.op-portal__date, .op-portal__eye { margin: 0; font-size: 0.72em; font-weight: 600; letter-spacing: 0.2em; color: #a8532e; }
-.op-portal__greet { margin: 0.25em 0 0; font-family: Newsreader, Georgia, serif; font-size: 2.6em; letter-spacing: -0.035em; line-height: 1; }
-.op-portal__sub { margin: 0.35em 0 0; font-family: Newsreader, Georgia, serif; font-style: italic; color: #5c564c; font-size: 1.15em; }
-.op-portal__row { display: grid; grid-template-columns: 1.7fr 1fr; gap: 3%; }
-.op-portal__next { display: flex; flex-direction: column; gap: 0.5em; padding: 1.2em 1.4em; border-radius: 1.1em; background: radial-gradient(120% 140% at 30% 0%, #2e2520 0%, #121110 70%); color: #ddd4c6; box-shadow: 0 1.2em 2.2em -1.2em rgba(182, 90, 50, 0.7); }
-.op-portal__next .op-portal__eye { color: #d4a27f; }
-.op-portal__title { margin: 0; font-family: Newsreader, Georgia, serif; color: #f5f0e8; font-size: 1.7em; letter-spacing: -0.03em; }
-.op-portal__btn { align-self: flex-start; padding: 0.55em 0.9em; background: #f5f0e8; color: #1c1a15; font-size: 0.7em; font-weight: 600; letter-spacing: 0.14em; }
-.op-portal__note { padding: 1em 1.1em; border: 1px solid #d5ccb8; border-radius: 1.1em; background: #fffdf9; }
-.op-portal__note p { margin: 0 0 0.5em; font-family: "Caveat", "Segoe Script", cursive; font-size: 1.5em; }
-.op-portal__note i { display: block; height: 1px; margin-top: 1.1em; background: #ece3d4; }
-.op-portal__today { padding: 0.6em 1.4em; border: 1px solid #d5ccb8; border-radius: 1.1em; background: #fbf8f3; }
-.op-portal__today p { display: flex; align-items: center; gap: 0.8em; margin: 0; padding: 0.55em 0; border-top: 1px solid #ece3d4; }
-.op-portal__today p:first-child { border-top: 0; }
-.op-portal__today s { color: #8c8477; }
-.op-portal__box { width: 1.1em; height: 1.1em; border: 1.5px solid #1c1a15; border-radius: 0.2em; flex: none; }
-.op-portal__box.is-on { background: #1c1a15; }
-.op-portal__week { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 2%; }
-.op-portal__week i { height: 3.2em; border: 1px solid #d5ccb8; background: #fbf8f3; }
-.op-portal__week i.is-today { border-color: #1c1a15; background: #fff; }
-@media (min-width: 900px) {
-  .page-studio .opener--stage { grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); }
-  .opener__stage { padding: 3.6rem 2rem 4.6rem max(1.15rem, calc((100cqw - 1040px) / 2)); }
-}
-@media (prefers-reduced-motion: no-preference) {
-  .opener__device { animation: sf-play-in 1s 0.2s cubic-bezier(0.22, 0.61, 0.16, 1) both; }
-}
-
 /* Legal footer (25 Nov 2026): business name, contact, Privacy and Terms. */
 .site-foot--legal { display: flex; flex-wrap: wrap; align-items: center; gap: 0 20px; color: var(--quiet); font-size: 15px; }
+
+/* ------------------------------------------------------------------
+   The signature brushstroke (25 Nov 2026). It paints itself in on the
+   Entrance, the light on the wet paint follows the pointer, and the
+   same stroke carries into the Studio hero. The ends taper like a
+   brush lifting off the paper. Reduced motion: the stroke is simply
+   there.
+   ------------------------------------------------------------------ */
+@property --px { syntax: "<percentage>"; inherits: true; initial-value: 30%; }
+@property --py { syntax: "<percentage>"; inherits: true; initial-value: 40%; }
+@property --sf-paint { syntax: "<percentage>"; inherits: false; initial-value: 100%; }
+
+.brushlive {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 864 / 392;
+  --tx: 0px;
+  --ty: 0px;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 7%, #000 93%, transparent 100%);
+  mask-image: linear-gradient(90deg, transparent 0%, #000 7%, #000 93%, transparent 100%);
+}
+.brushlive img,
+.page-studio .opener .brushlive img {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  max-height: none;
+  object-fit: contain;
+  transform: translate(var(--tx), var(--ty));
+  transition: transform 0.6s cubic-bezier(0.22, 0.61, 0.16, 1);
+}
+/* Light on the wet paint, cut to the shape of the stroke itself. */
+.brushlive__sheen {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  transform: translate(var(--tx), var(--ty));
+  transition: transform 0.6s cubic-bezier(0.22, 0.61, 0.16, 1);
+  background: radial-gradient(22% 46% at var(--px) var(--py), rgba(255, 236, 214, 0.75), rgba(255, 236, 214, 0) 100%);
+  mix-blend-mode: soft-light;
+  -webkit-mask: url(/images/stroke.webp) center / contain no-repeat;
+  mask: url(/images/stroke.webp) center / contain no-repeat;
+}
+
+/* Entrance: a bone panel beside the ink, the stroke across it. */
+.entrance__visual {
+  display: grid;
+  place-items: center;
+  height: 250px;
+  background: var(--bone);
+}
+.brushlive--entrance { width: 100%; }
+
+/* Studio hero: the stroke where the laptop was, on bone. */
+.page-studio .opener--brush { background: var(--bone); color: var(--ink); }
+.opener__brush {
+  display: grid;
+  place-items: center;
+  padding: 2.2rem 0 0.4rem;
+  overflow: hidden;
+}
+.brushlive--hero { width: 104%; margin-left: -4%; }
+
+@media (min-width: 720px) {
+  .entrance__visual { height: auto; }
+}
+@media (min-width: 900px) {
+  .opener__brush { padding: 3rem 0 3rem; }
+  .brushlive--hero { width: 106%; margin-left: -6%; }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .entrance__visual img { animation: none; }
+  /* The stroke paints itself in, left to right, the way it was made. */
+  .brushlive--entrance {
+    -webkit-mask-image:
+      linear-gradient(90deg, transparent 0%, #000 7%, #000 93%, transparent 100%),
+      linear-gradient(90deg, #000 calc(var(--sf-paint) - 12%), transparent var(--sf-paint));
+    mask-image:
+      linear-gradient(90deg, transparent 0%, #000 7%, #000 93%, transparent 100%),
+      linear-gradient(90deg, #000 calc(var(--sf-paint) - 12%), transparent var(--sf-paint));
+    -webkit-mask-composite: source-in;
+    mask-composite: intersect;
+    animation: sf-paint-in 1.5s 0.25s cubic-bezier(0.55, 0.1, 0.25, 1) both;
+  }
+  /* The light drifts by itself until a pointer takes over. */
+  .brushlive__sheen { animation: sf-sheen-drift 9s ease-in-out infinite alternate; }
+  .brushlive.is-pointing .brushlive__sheen { animation: none; transition: transform 0.6s cubic-bezier(0.22, 0.61, 0.16, 1), --px 0.25s linear, --py 0.25s linear; }
+}
+/* On the Studio, the paint stays wet (desktop with motion only). */
+@media (min-width: 900px) and (prefers-reduced-motion: no-preference) {
+  .brushlive--hero img { filter: url(#sf-wet-paint); }
+}
+@keyframes sf-paint-in {
+  from { --sf-paint: 0%; }
+  to { --sf-paint: 112%; }
+}
+@keyframes sf-sheen-drift {
+  0% { --px: 12%; --py: 30%; }
+  50% { --px: 50%; --py: 62%; }
+  100% { --px: 88%; --py: 72%; }
+}
+
