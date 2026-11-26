@@ -16,7 +16,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&amp;family=Newsreader:ital,opsz,wght@0,6..72,500;1,6..72,500&amp;display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/css/soforth-public.css?v=sf1125a" />
+  <link rel="stylesheet" href="/css/soforth-public.css?v=sf1125b" />
   <script>
     /* Browsers without cross-page view transitions get a short fade instead. */
     if (!("onpagereveal" in window)) document.documentElement.classList.add("no-xvt");
@@ -36,8 +36,11 @@
         <span class="entrance__progress" aria-hidden="true"><i></i></span>
         <p class="sr-live" aria-live="polite" id="entering"></p>
       </div>
-      <figure class="entrance__visual">
-        <img src="/images/connection.jpg" width="1280" height="720" alt="Bone and burnt orange sharing one curved edge." />
+      <figure class="entrance__visual" data-brush-area>
+        <div class="brushlive brushlive--entrance" data-brush>
+          <img src="/images/stroke.webp" width="864" height="392" alt="A single burnt orange brushstroke, painted across bone." fetchpriority="high" />
+          <span class="brushlive__sheen" aria-hidden="true"></span>
+        </div>
       </figure>
     </div>
   </header>
@@ -92,5 +95,6 @@
       window.addEventListener("keydown", pause);
     })();
   </script>
+  <script src="/js/soforth-brush.js?v=sf1125b" defer></script>
 </body>
 </html>
